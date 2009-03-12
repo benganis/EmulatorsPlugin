@@ -1,0 +1,8 @@
+/Users/benganis/Documents/AppleTV/Emulators_Source/EmulatorsAlertController.m: In function '-[EmulatorsAlertController runEmulatorWithIdentifier:withName:]':
+/Users/benganis/Documents/AppleTV/Emulators_Source/EmulatorsAlertController.m:19: error: 'tappedOnce' undeclared (first use in this function)
+/Users/benganis/Documents/AppleTV/Emulators_Source/EmulatorsAlertController.m:19: error: (Each undeclared identifier is reported only once
+/Users/benganis/Documents/AppleTV/Emulators_Source/EmulatorsAlertController.m:19: error: for each function it appears in.)
+/Users/benganis/Documents/AppleTV/Emulators_Source/EmulatorsAlertController.m: In function '-[EmulatorsAlertController showFrontRow]':
+/Users/benganis/Documents/AppleTV/Emulators_Source/EmulatorsAlertController.m:106: error: 'tappedOnce' undeclared (first use in this function)
+/Users/benganis/Documents/AppleTV/Emulators_Source/EmulatorsAlertController.m: In function '-[EmulatorsAlertController brEventAction:]':
+/Users/benganis/Documents/AppleTV/Emulators_Source/EmulatorsAlertController.m:188: error: 'tappedOnce' undeclared (first use in this function)
