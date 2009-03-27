@@ -17,10 +17,11 @@
 	identifier = aIdentifier;
 	name = aName;
 	tappedOnce = NO;
+	helper = [BackRowHelper sharedInstance];
 
 	NSLog(@"Opening application %@",identifier);
 	BOOL emulatorRunning = [workspace launchApplication:identifier];
-	if (emulatorRunning) [self hideFrontRow];
+	if (emulatorRunning) [helper hideFrontRowSetResponderTo:self];
 	
 	// NSImage *theIcon = [workspace iconForFile:[workspace fullPathForApplication:identifier]];
 	// CGImageRef *imgRef = ???
@@ -53,99 +54,6 @@
 	rightScript = aScript;
 }
 
-
-- (void)hideFrontRow
-{
-	if (DEBUG_MODE) NSLog(@"EmulatorsAlertController - hideFrontRow");
-	
-	@try
-	{
-		float ATV_version = [[[BRSettingsFacade sharedInstance] versionSoftware] floatValue];
-		if (DEBUG_MODE) NSLog(@"ATV_version = %f",ATV_version);
-		
-		if (ATV_version > 2.29)
-		{
-			if (DEBUG_MODE) NSLog(@"hideFrontRow - _setNewDisplay:kCGNullDirectDisplay");
-			[[BRDisplayManagerCore sharedInstance] _setNewDisplay:kCGNullDirectDisplay];
-			if (DEBUG_MODE) NSLog(@"hideFrontRow - releaseAllDisplays");
-			[[BRDisplayManagerCore sharedInstance] releaseAllDisplays];
-		}
-		else
-		{
-			if (DEBUG_MODE) NSLog(@"hideFrontRow : BRDisplayManagerDisplayOffline");
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"BRDisplayManagerDisplayOffline"
-																object:[BRDisplayManager sharedInstance]];
-			if (DEBUG_MODE) NSLog(@"hideFrontRow : BRDisplayManagerStopRenderingNotification");
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"BRDisplayManagerStopRenderingNotification"
-																object:[BRDisplayManager sharedInstance]];
-		}
-		
-		/*
-		BRPreferenceManager *prefs = [BRPreferenceManager sharedPreferences];
-		ScreenSaverTimeout = [prefs integerForKey:@"ScreenSaverTimeout" forDomain:@"com.apple.Finder" withValueForMissingPrefs:0];
-		[prefs _setValue:[NSNumber numberWithInt:0] forKey:@"ScreenSaverTimeout" forDomain:@"com.apple.Finder" sync:true];
-		if (DEBUG_MODE) NSLog(@"ScreenSaverTimeout was %i",ScreenSaverTimeout);
-		if (DEBUG_MODE) NSLog(@"ScreenSaverTimeout is %i",
-			[prefs integerForKey:@"ScreenSaverTimeout" forDomain:@"com.apple.Finder" withValueForMissingPrefs:0]);
-		*/
-	}
-	@catch (NSException *theErr)
-	{
-		if (DEBUG_MODE) NSLog(@"hideFrontRow : exception thrown...\n  name: %@ \n  reason: %@", [theErr name], [theErr reason]);
-	}
-	
-	// Hack to send remote events to brEventAction of this BRAlertController, even when display is offline
-	BREventManager *eventManager = [BREventManager sharedManager];
-	oldFirstResponder = [eventManager firstResponder];
-	[eventManager setFirstResponder:self];
-}
-
-- (void)showFrontRow
-{
-	if (DEBUG_MODE) NSLog(@"EmulatorsAlertController - showFrontRow");
-	tappedOnce = NO;
-	
-	// Hack to return sending remote events to BRBaseAppliance when we're done
-	BREventManager *eventManager = [BREventManager sharedManager];
-	[eventManager setFirstResponder:oldFirstResponder];
-	
-	@try
-	{
-		float ATV_version = [[[BRSettingsFacade sharedInstance] versionSoftware] floatValue];
-		if (DEBUG_MODE) NSLog(@"ATV_version = %f",ATV_version);
-		
-		if (ATV_version > 2.29)
-		{
-			if (DEBUG_MODE) NSLog(@"showFrontRow - _setNewDisplay:kCGDirectMainDisplay");
-			[[BRDisplayManagerCore sharedInstance] _setNewDisplay:kCGDirectMainDisplay];
-			if (DEBUG_MODE) NSLog(@"showFrontRow - captureAllDisplays");
-			[[BRDisplayManagerCore sharedInstance] captureAllDisplays];
-		}
-		else
-		{
-			if (DEBUG_MODE) NSLog(@"showFrontRow : BRDisplayManagerResumeRenderingNotification");
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"BRDisplayManagerResumeRenderingNotification"
-																object:[BRDisplayManager sharedInstance]];
-			if (DEBUG_MODE) NSLog(@"hideFrontRow : BRDisplayManagerDisplayOnline");
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"BRDisplayManagerDisplayOnline"
-																object:[BRDisplayManager sharedInstance]];
-		}
-		
-		/*
-		BRPreferenceManager *prefs = [BRPreferenceManager sharedPreferences];
-		if (DEBUG_MODE) NSLog(@"ScreenSaverTimeout was %i",
-			[prefs integerForKey:@"ScreenSaverTimeout" forDomain:@"com.apple.Finder" withValueForMissingPrefs:0]);
-		[prefs _setValue:[NSNumber numberWithInt:ScreenSaverTimeout] forKey:@"ScreenSaverTimeout" 
-			   forDomain:@"com.apple.Finder" sync:true];
-		if (DEBUG_MODE) NSLog(@"ScreenSaverTimeout is %i",
-			[prefs integerForKey:@"ScreenSaverTimeout" forDomain:@"com.apple.Finder" withValueForMissingPrefs:0]);
-		*/
-	}
-	@catch (NSException *theErr)
-	{
-		if (DEBUG_MODE) NSLog (@"showFrontRow : exception thrown...\n  name: %@ \n  reason: %@", [theErr name], [theErr reason]);
-	}
-}
 
 - (int)getEmulatorPID
 {
@@ -241,7 +149,8 @@
 			
 			NSDate *future = [NSDate dateWithTimeIntervalSinceNow: 1.0];
 			[NSThread sleepUntilDate:future];
-			[self showFrontRow];
+			tappedOnce = NO;
+			[helper showFrontRow];
 			tappedOnce = NO;
 			
 			return YES;
@@ -250,7 +159,8 @@
 		case 65673:		// tap play
 			if (DEBUG_MODE) NSLog(@"brEventAction: tap play -- returning to menu");			
 			
-			[self showFrontRow];
+			tappedOnce = NO;
+			[helper showFrontRow];
 			[[self stack] popController];
 			tappedOnce = NO;
 			
