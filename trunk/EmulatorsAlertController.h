@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 #import <BackRow/BackRow.h>
+#import <BackRowHelper.h>
 
 
 @interface EmulatorsAlertController : BRAlertController
@@ -19,6 +20,7 @@
 	NSString *downScript;
 	NSString *leftScript;
 	NSString *rightScript;
+	BackRowHelper *helper;
 	
 	BOOL tappedOnce;
 
@@ -33,8 +35,6 @@
 - (void)setDownScript:(NSString *)aScript;
 - (void)setLeftScript:(NSString *)aScript;
 - (void)setRightScript:(NSString *)aScript;
-- (void)hideFrontRow;
-- (void)showFrontRow;
 - (int)getEmulatorPID;
 - (void)runAppleScript:(NSString *)aScript;
 
