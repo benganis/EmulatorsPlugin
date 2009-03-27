@@ -21,10 +21,11 @@
 		3EB2F5690F3D5C2F003E095D /* EmulatorsAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2F5680F3D5C2F003E095D /* EmulatorsAlertController.m */; };
 		3ED7C1D20F365DA90006BC70 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3ED7C1D10F365DA90006BC70 /* defaults.plist */; };
 		3EE6FE210E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6FE200E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m */; };
+		5EB6AD990F6A800000EC5314 /* BackRow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB6AD970F6A800000EC5314 /* BackRow.framework */; };
+		5EB6AD9A0F6A800000EC5314 /* iPhotoAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB6AD980F6A800000EC5314 /* iPhotoAccess.framework */; };
+		5EB6B1FD0F6A81E000EC5314 /* BackRowHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		918B247E0D7CFAC000D87AC2 /* BackRow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 918B247C0D7CFAC000D87AC2 /* BackRow.framework */; };
-		918B247F0D7CFAC000D87AC2 /* iPhotoAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 918B247D0D7CFAC000D87AC2 /* iPhotoAccess.framework */; };
 		918B27B10D7CFB2100D87AC2 /* EmulatorsAppliance.m in Sources */ = {isa = PBXBuildFile; fileRef = 918B27B00D7CFB2100D87AC2 /* EmulatorsAppliance.m */; };
 /* End PBXBuildFile section */
 
@@ -50,10 +51,12 @@
 		3ED7C1D10F365DA90006BC70 /* defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
 		3EE6FE1F0E11DBC000C50DF2 /* EmulatorsApplianceMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsApplianceMenuController.h; sourceTree = "<group>"; };
 		3EE6FE200E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsApplianceMenuController.m; sourceTree = "<group>"; };
+		5EB6AD970F6A800000EC5314 /* BackRow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackRow.framework; path = ../../../Documents/Development/Headers/2.3/BackRow.framework; sourceTree = SOURCE_ROOT; };
+		5EB6AD980F6A800000EC5314 /* iPhotoAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iPhotoAccess.framework; path = ../../../Documents/Development/Headers/2.3/iPhotoAccess.framework; sourceTree = SOURCE_ROOT; };
+		5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackRowHelper.m; sourceTree = "<group>"; };
+		5EB6B1FE0F6A81EA00EC5314 /* BackRowHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackRowHelper.h; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Emulators.frappliance */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Emulators.frappliance; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		918B247C0D7CFAC000D87AC2 /* BackRow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackRow.framework; path = ../BackRow.framework; sourceTree = SOURCE_ROOT; };
-		918B247D0D7CFAC000D87AC2 /* iPhotoAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iPhotoAccess.framework; path = ../iPhotoAccess.framework; sourceTree = SOURCE_ROOT; };
 		918B27AF0D7CFB2100D87AC2 /* EmulatorsAppliance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsAppliance.h; sourceTree = "<group>"; };
 		918B27B00D7CFB2100D87AC2 /* EmulatorsAppliance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsAppliance.m; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -65,9 +68,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
-				918B247E0D7CFAC000D87AC2 /* BackRow.framework in Frameworks */,
-				918B247F0D7CFAC000D87AC2 /* iPhotoAccess.framework in Frameworks */,
 				3E7C06630E25396600546305 /* QuartzCore.framework in Frameworks */,
+				5EB6AD990F6A800000EC5314 /* BackRow.framework in Frameworks */,
+				5EB6AD9A0F6A800000EC5314 /* iPhotoAccess.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +119,8 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */,
+				5EB6B1FE0F6A81EA00EC5314 /* BackRowHelper.h */,
 				918B27AF0D7CFB2100D87AC2 /* EmulatorsAppliance.h */,
 				918B27B00D7CFB2100D87AC2 /* EmulatorsAppliance.m */,
 				3EE6FE1F0E11DBC000C50DF2 /* EmulatorsApplianceMenuController.h */,
@@ -131,9 +136,9 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				918B247C0D7CFAC000D87AC2 /* BackRow.framework */,
+				5EB6AD970F6A800000EC5314 /* BackRow.framework */,
+				5EB6AD980F6A800000EC5314 /* iPhotoAccess.framework */,
 				3E7C06620E25396600546305 /* QuartzCore.framework */,
-				918B247D0D7CFAC000D87AC2 /* iPhotoAccess.framework */,
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -225,6 +230,7 @@
 				3EE6FE210E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m in Sources */,
 				3EB2F5690F3D5C2F003E095D /* EmulatorsAlertController.m in Sources */,
 				3E18541A0F4781570070BEED /* EmulatorsOptionsController.m in Sources */,
+				5EB6B1FD0F6A81E000EC5314 /* BackRowHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +255,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../../../Documents/Development/Headers/2.3\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -300,6 +307,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../../../Documents/Development/Headers/2.3\"",
 				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
