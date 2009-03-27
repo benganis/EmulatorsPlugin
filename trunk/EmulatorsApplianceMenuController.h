@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 #import <BackRow/BackRow.h>
+#import <BackRowHelper.h>
 
 @interface EmulatorsApplianceMenuController : BRMediaMenuController
 {
@@ -22,6 +23,7 @@
 	NSString *leftScript;
 	NSString *rightScript;
 	NSArray *selectedFileExtensions;
+	BackRowHelper *helper;
 
 	BOOL emulatorRunning;
 	BOOL tappedOnce;
@@ -43,8 +45,6 @@
 - (void)setLeftScript:(NSString *)aScript;
 - (void)setRightScript:(NSString *)aScript;
 
-- (void)hideFrontRow;
-- (void)showFrontRow;
 - (int)getEmulatorPID;
 - (void)killEmulatorAndShowFrontRow;
 - (void)runAppleScript:(NSString *)aScript;
