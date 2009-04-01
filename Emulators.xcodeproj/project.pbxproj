@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		3E18541A0F4781570070BEED /* EmulatorsOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1854190F4781570070BEED /* EmulatorsOptionsController.m */; };
+		3E2EBCE60F833E1600B860F1 /* com.bannister.boycottadvance.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EBCE00F833E1600B860F1 /* com.bannister.boycottadvance.plist */; };
+		3E2EBCE70F833E1600B860F1 /* com.bannister.genesisplus.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EBCE10F833E1600B860F1 /* com.bannister.genesisplus.plist */; };
+		3E2EBCE80F833E1600B860F1 /* com.bannister.mugrat.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EBCE20F833E1600B860F1 /* com.bannister.mugrat.plist */; };
+		3E2EBCE90F833E1600B860F1 /* com.bannister.nestopia.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EBCE30F833E1600B860F1 /* com.bannister.nestopia.plist */; };
+		3E2EBCEA0F833E1600B860F1 /* com.Gerrit.sixtyforce.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EBCE40F833E1600B860F1 /* com.Gerrit.sixtyforce.plist */; };
+		3E2EBCEB0F833E1600B860F1 /* net.mame.mameosx.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EBCE50F833E1600B860F1 /* net.mame.mameosx.plist */; };
+		3E2EBCEF0F833E8300B860F1 /* RebuildLaunchServices.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3E2EBCEE0F833E8300B860F1 /* RebuildLaunchServices.sh */; };
 		3E74F25C0F4D30AC00409976 /* EnableUIScripting.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3E74F25B0F4D30AC00409976 /* EnableUIScripting.sh */; };
 		3E74F2600F4D314800409976 /* EnableQuartz.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3E74F25F0F4D314800409976 /* EnableQuartz.sh */; };
 		3E74F2790F4D330200409976 /* KillFinder.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3E74F2780F4D330200409976 /* KillFinder.sh */; };
-		3E74F2970F4D362C00409976 /* com.bannister.nestopia.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E74F28F0F4D362C00409976 /* com.bannister.nestopia.plist */; };
-		3E74F2980F4D362C00409976 /* net.mame.mameosx.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E74F2900F4D362C00409976 /* net.mame.mameosx.plist */; };
-		3E74F2990F4D362C00409976 /* com.bannister.mugrat.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E74F2910F4D362C00409976 /* com.bannister.mugrat.plist */; };
-		3E74F29A0F4D362C00409976 /* com.bannister.boycottadvance.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E74F2920F4D362C00409976 /* com.bannister.boycottadvance.plist */; };
-		3E74F29B0F4D362C00409976 /* com.Gerrit.sixtyforce.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E74F2930F4D362C00409976 /* com.Gerrit.sixtyforce.plist */; };
-		3E74F29D0F4D362C00409976 /* com.bannister.genesisplus.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E74F2950F4D362C00409976 /* com.bannister.genesisplus.plist */; };
 		3E7C06630E25396600546305 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7C06620E25396600546305 /* QuartzCore.framework */; };
 		3EB2F5690F3D5C2F003E095D /* EmulatorsAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2F5680F3D5C2F003E095D /* EmulatorsAlertController.m */; };
+		3EC3BB7F0F833CEF0086EA6C /* BackRow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3BB7E0F833CEF0086EA6C /* BackRow.framework */; };
 		3ED7C1D20F365DA90006BC70 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3ED7C1D10F365DA90006BC70 /* defaults.plist */; };
 		3EE6FE210E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6FE200E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m */; };
-		5EB6AD990F6A800000EC5314 /* BackRow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB6AD970F6A800000EC5314 /* BackRow.framework */; };
-		5EB6AD9A0F6A800000EC5314 /* iPhotoAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB6AD980F6A800000EC5314 /* iPhotoAccess.framework */; };
 		5EB6B1FD0F6A81E000EC5314 /* BackRowHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
@@ -36,23 +36,23 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		3E1854180F4781570070BEED /* EmulatorsOptionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsOptionsController.h; sourceTree = "<group>"; };
 		3E1854190F4781570070BEED /* EmulatorsOptionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsOptionsController.m; sourceTree = "<group>"; };
+		3E2EBCE00F833E1600B860F1 /* com.bannister.boycottadvance.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = com.bannister.boycottadvance.plist; path = Preferences/com.bannister.boycottadvance.plist; sourceTree = "<group>"; };
+		3E2EBCE10F833E1600B860F1 /* com.bannister.genesisplus.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = com.bannister.genesisplus.plist; path = Preferences/com.bannister.genesisplus.plist; sourceTree = "<group>"; };
+		3E2EBCE20F833E1600B860F1 /* com.bannister.mugrat.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = com.bannister.mugrat.plist; path = Preferences/com.bannister.mugrat.plist; sourceTree = "<group>"; };
+		3E2EBCE30F833E1600B860F1 /* com.bannister.nestopia.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = com.bannister.nestopia.plist; path = Preferences/com.bannister.nestopia.plist; sourceTree = "<group>"; };
+		3E2EBCE40F833E1600B860F1 /* com.Gerrit.sixtyforce.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = com.Gerrit.sixtyforce.plist; path = Preferences/com.Gerrit.sixtyforce.plist; sourceTree = "<group>"; };
+		3E2EBCE50F833E1600B860F1 /* net.mame.mameosx.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = net.mame.mameosx.plist; path = Preferences/net.mame.mameosx.plist; sourceTree = "<group>"; };
+		3E2EBCEE0F833E8300B860F1 /* RebuildLaunchServices.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = RebuildLaunchServices.sh; sourceTree = "<group>"; };
 		3E74F25B0F4D30AC00409976 /* EnableUIScripting.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = EnableUIScripting.sh; sourceTree = "<group>"; };
 		3E74F25F0F4D314800409976 /* EnableQuartz.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = EnableQuartz.sh; sourceTree = "<group>"; };
 		3E74F2780F4D330200409976 /* KillFinder.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = KillFinder.sh; sourceTree = "<group>"; };
-		3E74F28F0F4D362C00409976 /* com.bannister.nestopia.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = com.bannister.nestopia.plist; sourceTree = "<group>"; };
-		3E74F2900F4D362C00409976 /* net.mame.mameosx.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = net.mame.mameosx.plist; sourceTree = "<group>"; };
-		3E74F2910F4D362C00409976 /* com.bannister.mugrat.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = com.bannister.mugrat.plist; sourceTree = "<group>"; };
-		3E74F2920F4D362C00409976 /* com.bannister.boycottadvance.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = com.bannister.boycottadvance.plist; sourceTree = "<group>"; };
-		3E74F2930F4D362C00409976 /* com.Gerrit.sixtyforce.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = com.Gerrit.sixtyforce.plist; sourceTree = "<group>"; };
-		3E74F2950F4D362C00409976 /* com.bannister.genesisplus.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = com.bannister.genesisplus.plist; sourceTree = "<group>"; };
 		3E7C06620E25396600546305 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		3EB2F5670F3D5C2F003E095D /* EmulatorsAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsAlertController.h; sourceTree = "<group>"; };
 		3EB2F5680F3D5C2F003E095D /* EmulatorsAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsAlertController.m; sourceTree = "<group>"; };
+		3EC3BB7E0F833CEF0086EA6C /* BackRow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackRow.framework; path = ../BackRow.framework; sourceTree = SOURCE_ROOT; };
 		3ED7C1D10F365DA90006BC70 /* defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
 		3EE6FE1F0E11DBC000C50DF2 /* EmulatorsApplianceMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsApplianceMenuController.h; sourceTree = "<group>"; };
 		3EE6FE200E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsApplianceMenuController.m; sourceTree = "<group>"; };
-		5EB6AD970F6A800000EC5314 /* BackRow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackRow.framework; path = ../../../Documents/Development/Headers/2.3/BackRow.framework; sourceTree = SOURCE_ROOT; };
-		5EB6AD980F6A800000EC5314 /* iPhotoAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iPhotoAccess.framework; path = ../../../Documents/Development/Headers/2.3/iPhotoAccess.framework; sourceTree = SOURCE_ROOT; };
 		5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackRowHelper.m; sourceTree = "<group>"; };
 		5EB6B1FE0F6A81EA00EC5314 /* BackRowHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackRowHelper.h; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Emulators.frappliance */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Emulators.frappliance; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,8 +69,7 @@
 			files = (
 				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
 				3E7C06630E25396600546305 /* QuartzCore.framework in Frameworks */,
-				5EB6AD990F6A800000EC5314 /* BackRow.framework in Frameworks */,
-				5EB6AD9A0F6A800000EC5314 /* iPhotoAccess.framework in Frameworks */,
+				3EC3BB7F0F833CEF0086EA6C /* BackRow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,14 +103,15 @@
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 				3ED7C1D10F365DA90006BC70 /* defaults.plist */,
 				3E74F25B0F4D30AC00409976 /* EnableUIScripting.sh */,
+				3E2EBCEE0F833E8300B860F1 /* RebuildLaunchServices.sh */,
 				3E74F25F0F4D314800409976 /* EnableQuartz.sh */,
 				3E74F2780F4D330200409976 /* KillFinder.sh */,
-				3E74F28F0F4D362C00409976 /* com.bannister.nestopia.plist */,
-				3E74F2900F4D362C00409976 /* net.mame.mameosx.plist */,
-				3E74F2910F4D362C00409976 /* com.bannister.mugrat.plist */,
-				3E74F2920F4D362C00409976 /* com.bannister.boycottadvance.plist */,
-				3E74F2930F4D362C00409976 /* com.Gerrit.sixtyforce.plist */,
-				3E74F2950F4D362C00409976 /* com.bannister.genesisplus.plist */,
+				3E2EBCE00F833E1600B860F1 /* com.bannister.boycottadvance.plist */,
+				3E2EBCE10F833E1600B860F1 /* com.bannister.genesisplus.plist */,
+				3E2EBCE20F833E1600B860F1 /* com.bannister.mugrat.plist */,
+				3E2EBCE30F833E1600B860F1 /* com.bannister.nestopia.plist */,
+				3E2EBCE40F833E1600B860F1 /* com.Gerrit.sixtyforce.plist */,
+				3E2EBCE50F833E1600B860F1 /* net.mame.mameosx.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -119,8 +119,8 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */,
 				5EB6B1FE0F6A81EA00EC5314 /* BackRowHelper.h */,
+				5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */,
 				918B27AF0D7CFB2100D87AC2 /* EmulatorsAppliance.h */,
 				918B27B00D7CFB2100D87AC2 /* EmulatorsAppliance.m */,
 				3EE6FE1F0E11DBC000C50DF2 /* EmulatorsApplianceMenuController.h */,
@@ -136,8 +136,7 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5EB6AD970F6A800000EC5314 /* BackRow.framework */,
-				5EB6AD980F6A800000EC5314 /* iPhotoAccess.framework */,
+				3EC3BB7E0F833CEF0086EA6C /* BackRow.framework */,
 				3E7C06620E25396600546305 /* QuartzCore.framework */,
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
 			);
@@ -210,12 +209,13 @@
 				3E74F25C0F4D30AC00409976 /* EnableUIScripting.sh in Resources */,
 				3E74F2600F4D314800409976 /* EnableQuartz.sh in Resources */,
 				3E74F2790F4D330200409976 /* KillFinder.sh in Resources */,
-				3E74F2970F4D362C00409976 /* com.bannister.nestopia.plist in Resources */,
-				3E74F2980F4D362C00409976 /* net.mame.mameosx.plist in Resources */,
-				3E74F2990F4D362C00409976 /* com.bannister.mugrat.plist in Resources */,
-				3E74F29A0F4D362C00409976 /* com.bannister.boycottadvance.plist in Resources */,
-				3E74F29B0F4D362C00409976 /* com.Gerrit.sixtyforce.plist in Resources */,
-				3E74F29D0F4D362C00409976 /* com.bannister.genesisplus.plist in Resources */,
+				3E2EBCE60F833E1600B860F1 /* com.bannister.boycottadvance.plist in Resources */,
+				3E2EBCE70F833E1600B860F1 /* com.bannister.genesisplus.plist in Resources */,
+				3E2EBCE80F833E1600B860F1 /* com.bannister.mugrat.plist in Resources */,
+				3E2EBCE90F833E1600B860F1 /* com.bannister.nestopia.plist in Resources */,
+				3E2EBCEA0F833E1600B860F1 /* com.Gerrit.sixtyforce.plist in Resources */,
+				3E2EBCEB0F833E1600B860F1 /* net.mame.mameosx.plist in Resources */,
+				3E2EBCEF0F833E8300B860F1 /* RebuildLaunchServices.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

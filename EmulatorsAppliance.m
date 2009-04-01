@@ -43,6 +43,11 @@
 		if (DEBUG_MODE) NSLog(@"EmulatorsAppliance has found com.bgan1982.EmulatorsPlugIn.plist");
 	}
 	
+	// Rebuild Launch Services for noobs
+	if (DEBUG_MODE) NSLog(@"Rebuilding Launch Services...",[bundle bundlePath]);
+	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"RebuildLaunchServices" ofType:@"sh"]
+							 arguments:[NSArray arrayWithObjects:nil]];
+	
 	return className;
 }
 
