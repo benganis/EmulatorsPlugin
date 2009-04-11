@@ -4,22 +4,29 @@
 <dict>
 	<key>Emulators</key>
 	<dict>
+		<key>ShortDescription</key>
+		<string>Appliance used to navigate ROMs and play emulators</string>
+		<key>Developer</key>
+		<string>bgan1982@mac.com</string>
 		<key>Version</key>
-		<string>141</string>
+		<string>1.4.1</string>
 		<key>displayVersion</key>
 		<string>1.4.1</string>
 		<key>md5</key>
 		<string>c785f7f3f6ac451397ec3b5914283422</string>
+                <key>DisplayName</key>
+                <string>EmulatorsPlugIn</string>
 		<key>name</key>
 		<string>Emulators</string>
-		<key>theDesc</key>
+		<key>desc</key>
 		<string>http://emulatorsplugin.googlecode.com/files/README.txt</string>
-		<key>theURL</key>
+		<key>URL</key>
 		<string>http://emulatorsplugin.googlecode.com/files/Emulators_PlugIn_1.4.zip</string>
-		<key>thelicense</key>
+                <key>ImageURL</key>
+                <string>http://emulatorsplugin.googlecode.com/files/emulators.png</string>
+		<key>license</key>
 		<string>http://emulatorsplugin.googlecode.com/files/LICENSE.txt</string>
-		<key>Summary</key>
-		<string>Appliance used to nagivate ROMs and play emulators</string>
 	</dict>
 </dict>
 </plist>
+
