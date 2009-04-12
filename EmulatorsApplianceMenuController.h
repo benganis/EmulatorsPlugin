@@ -27,7 +27,6 @@
 
 	BOOL emulatorRunning;
 	BOOL tappedOnce;
-	int ScreenSaverTimeout;
 	NSString *selectedFilename;
 
 	NSWorkspace *workspace;

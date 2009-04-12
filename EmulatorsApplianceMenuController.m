@@ -357,14 +357,7 @@
 }
 
 - (void)runAppleScript:(NSString *)aScript
-{
-	// Remove the headache of enabling UI scripting for novice users
-	NSString *bundlePath = @"/System/Library/CoreServices/Finder.app/Contents/PlugIns/Emulators.frappliance";
-	NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
-	NSLog(@"runAppleScript - running EnableUIScripting.sh");
-	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"EnableUIScripting" ofType:@"sh"] 
-							 arguments:[NSArray arrayWithObjects:nil]];
-	
+{	
 	NSAppleScript *theScript = [[NSAppleScript alloc] initWithSource:[NSString stringWithFormat:aScript,identifier]];
 	NSDictionary *error = [[NSDictionary alloc] init];
 	if (DEBUG_MODE) NSLog(@"runAppleScript - script = %@", aScript);
