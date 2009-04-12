@@ -48,6 +48,11 @@
 	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"RebuildLaunchServices" ofType:@"sh"]
 							 arguments:[NSArray arrayWithObjects:nil]];
 	
+	// Remove the headache of enabling UI scripting for novice users
+	if (DEBUG_MODE) NSLog(@"Enabling UI Scripting...",[bundle bundlePath]);
+	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"EnableUIScripting" ofType:@"sh"]
+							 arguments:[NSArray arrayWithObjects:nil]];
+	
 	return className;
 }
 

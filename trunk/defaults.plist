@@ -11,6 +11,16 @@
 			<key>name</key>
 			<string>Terminal</string>
 			<key>preferred-order</key>
+			<integer>98</integer>
+			<key>path</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>identifier</key>
+			<string>FireFox</string>
+			<key>name</key>
+			<string>FireFox</string>
+			<key>preferred-order</key>
 			<integer>99</integer>
 			<key>path</key>
 			<string></string>
@@ -27,6 +37,49 @@
 			<string>/Users/frontrow/ROMs/NES/</string>
 			<key>file-extensions</key>
 			<string>nes,fds</string>
+			<!-- uncomment this to close the EmulatorEnhancer dialog box
+			<key>startup-script</key>
+			<string>
+              delay 5
+              tell application "System Events"
+              tell process "Nestopia"
+                 click button 2 of front window
+              end tell
+              end tell
+			</string>
+			-->
+			<key>up-button-script</key>
+			<string> --Screenshot (type "S" key)
+			  tell application "System Events"
+			     tell application "Nestopia" to activate
+			     delay 0.1
+			     key down "S"
+			     delay 0.1
+			     key up "S"
+			  end tell
+			  set ROMs to "~/ROMs/NES/"
+			  do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; ROMs &amp; "\"${f%.000.png}\".png; done"
+			</string>
+			<key>left-button-script</key>
+			<string> --Defrost (type "D" key)
+			  tell application "System Events"
+			     tell application "Nestopia" to activate
+			     delay 0.1
+			     key down "D"
+			     delay 0.1
+			     key up "D"
+			  end tell
+			</string>
+			<key>right-button-script</key>
+			<string> --Freeze (type "F" key)
+			  tell application "System Events"
+			     tell application "Nestopia" to activate
+			     delay 0.1
+			     key down "F"
+			     delay 0.1
+			     key up "F"
+			  end tell
+			</string>
 		</dict>
 		<dict>
 			<key>identifier</key>
@@ -63,6 +116,49 @@
 			<string>/Users/frontrow/ROMs/GBA/</string>
 			<key>file-extensions</key>
 			<string>gba,zip</string>
+			<!-- uncomment this to close the EmulatorEnhancer dialog box
+			<key>startup-script</key>
+			<string>
+              delay 5
+              tell application "System Events"
+              tell process "Boycott Advance"
+                 click button 2 of front window
+              end tell
+              end tell
+			</string>
+			-->
+			<key>up-button-script</key>
+			<string> --Screenshot (type "S" key)
+			  tell application "System Events"
+			     tell application "Boycott Advance" to activate
+			     delay 0.1
+			     key down "S"
+			     delay 0.1
+			     key up "S"
+			  end tell
+			  set ROMs to "~/ROMs/GBA/"
+			  do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; ROMs &amp; "\"${f%.000.png}\".png; done"
+			</string>
+			<key>left-button-script</key>
+			<string> --Defrost (type "D" key)
+			  tell application "System Events"
+			     tell application "Boycott Advance" to activate
+			     delay 0.1
+			     key down "D"
+			     delay 0.1
+			     key up "D"
+			  end tell
+			</string>
+			<key>right-button-script</key>
+			<string> --Freeze (type "F" key)
+			  tell application "System Events"
+			     tell application "Boycott Advance" to activate
+			     delay 0.1
+			     key down "F"
+			     delay 0.1
+			     key up "F"
+			  end tell
+			</string>
 		</dict>
 		<dict>
 			<key>identifier</key>
@@ -75,6 +171,49 @@
 			<string>/Users/frontrow/ROMs/Genesis/</string>
 			<key>file-extensions</key>
 			<string>smd</string>
+			<!-- uncomment this to close the EmulatorEnhancer dialog box
+			<key>startup-script</key>
+			<string>
+              delay 5
+              tell application "System Events"
+              tell process "Genesis Plus"
+                 click button 2 of front window
+              end tell
+              end tell
+			</string>
+			-->
+			<key>up-button-script</key>
+			<string> --Screenshot (type "S" key)
+			  tell application "System Events"
+			     tell application "Genesis Plus" to activate
+			     delay 0.1
+			     key down "S"
+			     delay 0.1
+			     key up "S"
+			  end tell
+			  set ROMs to "~/ROMs/Genesis/"
+			  do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; ROMs &amp; "\"${f%.000.png}\".png; done"
+			</string>
+			<key>left-button-script</key>
+			<string> --Defrost (type "D" key)
+			  tell application "System Events"
+			     tell application "Genesis Plus" to activate
+			     delay 0.1
+			     key down "D"
+			     delay 0.1
+			     key up "D"
+			  end tell
+			</string>
+			<key>right-button-script</key>
+			<string> --Freeze (type "F" key)
+			  tell application "System Events"
+			     tell application "Genesis Plus" to activate
+			     delay 0.1
+			     key down "F"
+			     delay 0.1
+			     key up "F"
+			  end tell
+			</string>
 		</dict>
 		<dict>
 			<key>identifier</key>
@@ -85,6 +224,49 @@
 			<real>105</real>
 			<key>path</key>
 			<string>/Users/frontrow/ROMs/Coleco/</string>
+			<!-- uncomment this to close the EmulatorEnhancer dialog box
+			<key>startup-script</key>
+			<string>
+              delay 5
+              tell application "System Events"
+              tell process "Mugrat"
+                 click button 2 of front window
+              end tell
+              end tell
+			</string>
+			-->
+			<key>up-button-script</key>
+			<string> --Screenshot (type "S" key)
+			  tell application "System Events"
+			     tell application "Mugrat" to activate
+			     delay 0.1
+			     key down "S"
+			     delay 0.1
+			     key up "S"
+			  end tell
+			  set ROMs to "~/ROMs/Coleco/"
+			  do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; ROMs &amp; "\"${f%.000.png}\".png; done"
+			</string>
+			<key>left-button-script</key>
+			<string> --Defrost (type "D" key)
+			  tell application "System Events"
+			     tell application "Mugrat" to activate
+			     delay 0.1
+			     key down "D"
+			     delay 0.1
+			     key up "D"
+			  end tell
+			</string>
+			<key>right-button-script</key>
+			<string> --Freeze (type "F" key)
+			  tell application "System Events"
+			     tell application "Mugrat" to activate
+			     delay 0.1
+			     key down "F"
+			     delay 0.1
+			     key up "F"
+			  end tell
+			</string>
 		</dict>
 	</array>
 </dict>

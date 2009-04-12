@@ -174,10 +174,6 @@
 {
 	if (DEBUG_MODE) NSLog(@"runAppleScript - script = %@", aScript);
 	
-	// Remove the headache of enabling UI scripting for novice users
-	[NSTask launchedTaskWithLaunchPath:[[NSBundle bundleForClass:[self class]] 
-										pathForResource:@"EnableUIScripting" ofType:@"sh"] arguments:@""];
-	
 	NSAppleScript *theScript = [[NSAppleScript alloc] initWithSource:[NSString stringWithFormat:aScript,identifier]];
 	NSDictionary *error = [[NSDictionary alloc] init];
 	NSAppleEventDescriptor *descriptor = [theScript executeAndReturnError:&error];
