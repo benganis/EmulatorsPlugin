@@ -24,7 +24,7 @@
 		<string>http://emulatorsplugin.googlecode.com/files/README.txt</string>
 		<key>URL</key>
 		<string>http://emulatorsplugin.googlecode.com/files/Emulators_PlugIn_1.4.1.zip</string>
-		<key>imageURL</key>
+		<key>ImageURL</key>
 		<string>http://emulatorsplugin.googlecode.com/svn/trunk/Emulators.png</string>
 		<key>license</key>
 		<string>http://emulatorsplugin.googlecode.com/files/LICENSE.txt</string>
