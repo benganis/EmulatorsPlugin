@@ -6,6 +6,8 @@
 	<dict>
 		<key>ShortDescription</key>
 		<string>Appliance used to navigate ROMs and play emulators</string>
+		<key>ReleaseDate</key>
+		<date>2009-04-15</date>
 		<key>Developer</key>
 		<string>bgan1982@mac.com</string>
 		<key>Version</key>
