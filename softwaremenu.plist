@@ -13,7 +13,7 @@
 		<key>displayVersion</key>
 		<string>1.4.1</string>
 		<key>md5</key>
-		<string>c785f7f3f6ac451397ec3b5914283422</string>
+		<string>9e2b892f8b7a6fb5c04d217833f38d71cedf9021</string>
                 <key>DisplayName</key>
                 <string>EmulatorsPlugIn</string>
 		<key>name</key>
@@ -21,7 +21,7 @@
 		<key>desc</key>
 		<string>http://emulatorsplugin.googlecode.com/files/README.txt</string>
 		<key>URL</key>
-		<string>http://emulatorsplugin.googlecode.com/files/Emulators_PlugIn_1.4.zip</string>
+		<string>http://emulatorsplugin.googlecode.com/files/Emulators_PlugIn_1.4.1.zip</string>
                 <key>ImageURL</key>
                 <string>http://emulatorsplugin.googlecode.com/files/emulators.png</string>
 		<key>license</key>
