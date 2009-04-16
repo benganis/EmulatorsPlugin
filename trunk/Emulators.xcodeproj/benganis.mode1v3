@@ -312,8 +312,6 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -331,7 +329,7 @@
 										<key>_historyCapacity</key>
 										<integer>20</integer>
 										<key>bookmark</key>
-										<string>3ECBC30D0F9180170053830D</string>
+										<string>3E0DB1CF0F96A78100F48424</string>
 										<key>history</key>
 										<array>
 											<string>3E12CE230F53AE4800024E24</string>
@@ -351,7 +349,7 @@
 											<string>3ECBC2F70F917F3F0053830D</string>
 											<string>3ECBC2F80F917F3F0053830D</string>
 											<string>3ECBC30A0F9180170053830D</string>
-											<string>3ECBC30B0F9180170053830D</string>
+											<string>3ECBC30D0F9180170053830D</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -429,9 +427,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3ECBC30E0F9180170053830D</string>
+				<string>3E0DB1CD0F96A77900F48424</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3ECBC30F0F9180170053830D</string>
+				<string>3E0DB1CE0F96A77900F48424</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
