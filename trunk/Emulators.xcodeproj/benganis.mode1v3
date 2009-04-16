@@ -276,7 +276,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>15</integer>
+									<integer>13</integer>
 									<integer>12</integer>
 									<integer>0</integer>
 								</array>
@@ -317,7 +317,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>defaults.plist</string>
+								<string>Info.plist</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,31 +325,31 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>defaults.plist</string>
+										<string>Info.plist</string>
 										<key>_historyCapacity</key>
 										<integer>20</integer>
 										<key>bookmark</key>
-										<string>3E0DB1CF0F96A78100F48424</string>
+										<string>3EE94C590F96BC35000EB844</string>
 										<key>history</key>
 										<array>
 											<string>3E12CE230F53AE4800024E24</string>
 											<string>3E12CE2C0F53AE4800024E24</string>
 											<string>3E12CE750F53AF0C00024E24</string>
 											<string>3E12CE760F53AF0C00024E24</string>
-											<string>3E12CE8A0F53CF9100024E24</string>
 											<string>3E12CE8B0F53CF9100024E24</string>
 											<string>3E12CE8D0F53CF9100024E24</string>
-											<string>3E2EBCF60F83410F00B860F1</string>
-											<string>3E61C9210F915C0E00563EF1</string>
-											<string>3E61C93D0F915CAD00563EF1</string>
-											<string>3E61C93E0F915CAD00563EF1</string>
-											<string>3ECBC2F40F917F3F0053830D</string>
-											<string>3ECBC2F50F917F3F0053830D</string>
-											<string>3ECBC2F60F917F3F0053830D</string>
-											<string>3ECBC2F70F917F3F0053830D</string>
-											<string>3ECBC2F80F917F3F0053830D</string>
-											<string>3ECBC30A0F9180170053830D</string>
-											<string>3ECBC30D0F9180170053830D</string>
+											<string>3E4AF3AD0F96BB94005ABDD5</string>
+											<string>3E4AF3AE0F96BB94005ABDD5</string>
+											<string>3E4AF3AF0F96BB94005ABDD5</string>
+											<string>3E4AF3B00F96BB94005ABDD5</string>
+											<string>3E4AF3B10F96BB94005ABDD5</string>
+											<string>3E4AF3B20F96BB94005ABDD5</string>
+											<string>3E4AF3B30F96BB94005ABDD5</string>
+											<string>3E4AF3B40F96BB94005ABDD5</string>
+											<string>3E4AF3B50F96BB94005ABDD5</string>
+											<string>3E4AF3B60F96BB94005ABDD5</string>
+											<string>3EE94C530F96BC35000EB844</string>
+											<string>3E4AF3AC0F96BB94005ABDD5</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -370,6 +370,8 @@
 											<string>3E2EBD040F83410F00B860F1</string>
 											<string>3E2EBD050F83410F00B860F1</string>
 											<string>3ECBC30C0F9180170053830D</string>
+											<string>3E4AF3B80F96BB94005ABDD5</string>
+											<string>3EE94C540F96BC35000EB844</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -427,9 +429,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>3E0DB1CD0F96A77900F48424</string>
+				<string>3EE94C560F96BC35000EB844</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>3E0DB1CE0F96A77900F48424</string>
+				<string>3EE94C570F96BC35000EB844</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -563,6 +565,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>3EC6203A0E04AB4F00A8BB87</string>
 		<string>/Users/benganis/Documents/AppleTV/emulatorsplugin/Emulators.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -643,7 +646,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>3EC6203A0E04AB4F00A8BB87</string>
-				<string>3E61C9790F9166E800563EF1</string>
+				<string>3EE94C580F96BC35000EB844</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
