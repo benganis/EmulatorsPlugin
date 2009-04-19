@@ -212,6 +212,25 @@
 			if (DEBUG_MODE) NSLog(@"hideFrontRow : BRDisplayManagerStopRenderingNotification");
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"BRDisplayManagerStopRenderingNotification"
 																object:[BRDisplayManager sharedInstance]];
+			
+			screenSaverWasEnabled = [[BRSettingsFacade sharedInstance] screenSaverEnabled];
+			
+			CGDisplayErr theErr = kCGErrorNoneAvailable;
+			int attempts=1;
+			while (theErr != kCGErrorSuccess && attempts<=5)
+			{
+				if (DEBUG_MODE) NSLog(@"hideFrontRow : CGReleaseAllDisplays");
+				theErr = CGReleaseAllDisplays();
+				
+				attempts++;
+				if (theErr != kCGErrorSuccess)
+				{
+					NSLog(@"hideFrontRow : CGDisplayErr = %i",theErr);
+					NSDate *future = [NSDate dateWithTimeIntervalSinceNow: 0.1];
+					[NSThread sleepUntilDate:future];
+				}
+			}
+			
 		}
 		
 		/*
