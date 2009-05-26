@@ -1,6 +1,6 @@
 //
 //  EmulatorsAppliance.m
-//  EmulatorsPlugIn 1.4.1
+//  EmulatorsPlugIn 1.5
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
@@ -143,8 +143,9 @@
 	}
 	
 	// Display a menu for path directory
-	EmulatorsApplianceMenuController *menu = [[EmulatorsApplianceMenuController alloc]
-						initWithIdentifier:identifier withName:name withPath:path withExtensions:fileExtensions];
+	EmulatorsApplianceMenuController *menu = 
+		[[EmulatorsApplianceMenuController alloc] 
+			initWithIdentifier:identifier withName:name withPath:path withExtensions:fileExtensions];
 
 	if (startupScript != nil) [menu setStartupScript: startupScript];
 	if (upScript != nil) [menu setUpScript: upScript];

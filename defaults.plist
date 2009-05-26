@@ -57,8 +57,8 @@
 			     delay 0.1
 			     key up "S"
 			  end tell
-			  set ROMs to "~/ROMs/NES/"
-			  do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; ROMs &amp; "\"${f%.000.png}\".png; done"
+			  set pathToROM to do shell script "cat ~/.pathToROM"
+              do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; pathToROM &amp; "\"${f%%.000.png}\".png; done"
 			</string>
 			<key>left-button-script</key>
 			<string> --Defrost (type "D" key)
@@ -136,8 +136,8 @@
 			     delay 0.1
 			     key up "S"
 			  end tell
-			  set ROMs to "~/ROMs/GBA/"
-			  do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; ROMs &amp; "\"${f%.000.png}\".png; done"
+			  set pathToROM to do shell script "cat ~/.pathToROM"
+              do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; pathToROM &amp; "\"${f%%.000.png}\".png; done"
 			</string>
 			<key>left-button-script</key>
 			<string> --Defrost (type "D" key)
@@ -176,7 +176,7 @@
 			<string>
               delay 5
               tell application "System Events"
-              tell process "Genesis Plus"
+              tell process "Sega Genesis"
                  click button 2 of front window
               end tell
               end tell
@@ -185,19 +185,19 @@
 			<key>up-button-script</key>
 			<string> --Screenshot (type "S" key)
 			  tell application "System Events"
-			     tell application "Genesis Plus" to activate
+			     tell application "Sega Genesis" to activate
 			     delay 0.1
 			     key down "S"
 			     delay 0.1
 			     key up "S"
 			  end tell
-			  set ROMs to "~/ROMs/Genesis/"
-			  do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; ROMs &amp; "\"${f%.000.png}\".png; done"
+			  set pathToROM to do shell script "cat ~/.pathToROM"
+              do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; pathToROM &amp; "\"${f%%.000.png}\".png; done"
 			</string>
 			<key>left-button-script</key>
 			<string> --Defrost (type "D" key)
 			  tell application "System Events"
-			     tell application "Genesis Plus" to activate
+			     tell application "Sega Genesis" to activate
 			     delay 0.1
 			     key down "D"
 			     delay 0.1
@@ -207,7 +207,7 @@
 			<key>right-button-script</key>
 			<string> --Freeze (type "F" key)
 			  tell application "System Events"
-			     tell application "Genesis Plus" to activate
+			     tell application "Sega Genesis" to activate
 			     delay 0.1
 			     key down "F"
 			     delay 0.1
@@ -244,8 +244,8 @@
 			     delay 0.1
 			     key up "S"
 			  end tell
-			  set ROMs to "~/ROMs/Coleco/"
-			  do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; ROMs &amp; "\"${f%.000.png}\".png; done"
+			  set pathToROM to do shell script "cat ~/.pathToROM"
+              do shell script "cd ~/Desktop; for f in *.png; do mv \"$f\" " &amp; pathToROM &amp; "\"${f%%.000.png}\".png; done"
 			</string>
 			<key>left-button-script</key>
 			<string> --Defrost (type "D" key)

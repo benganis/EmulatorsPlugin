@@ -1,6 +1,6 @@
 //
 //  EmulatorsAlertController.h
-//  EmulatorsPlugIn 1.4.1
+//  EmulatorsPlugIn 1.5
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
@@ -12,7 +12,8 @@
 - (id)init;
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - initWithApplicance");
-	id returnid = [super init];
+	self = [super init];
+	if (self == nil) return nil;
 	
 	[self addLabel:@"com.bgan1982.Emulators.EmulatorsApplianceMenuController"];
 	[self setListTitle:@"Emulators Options"];
@@ -38,7 +39,7 @@
 	
 	id list = [self list];
 	[list setDatasource: self];
-	return returnid;
+	return self;
 }
 
 - (void)dealloc

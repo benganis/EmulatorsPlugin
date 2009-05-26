@@ -1,6 +1,6 @@
 //
 //  EmulatorsApplianceMenuController.m
-//  EmulatorsPlugIn 1.4.1
+//  EmulatorsPlugIn 1.5
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
@@ -9,32 +9,35 @@
 
 @implementation EmulatorsApplianceMenuController
 
-- (void)dealloc
+// Overloading the standard init method finally allows recursive menus
+- (id)init
 {
-	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - dealloc");
-	[helper showFrontRow];
-	tappedOnce = NO;
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[super dealloc];  
+	return [self initWithIdentifier:nil	withName:nil withPath:nil withExtensions:nil];
 }
 
 // My initialization routine
 - (id)initWithIdentifier:(NSString *)initId withName:(NSString *)initName withPath:(NSString *)initPath 
-		  withExtensions:(NSArray *)initExtensions 
+		  withExtensions:(NSArray *)initExtensions;
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - initWithIdentifier:%@ withName:%@ withPath:%@",
 						  initId,initName,initPath);
 
-	id returnid = [super init];
+	self = [super init];
+	if (self == nil) return nil;
+	
 	workspace = [NSWorkspace sharedWorkspace];
 	helper = [BackRowHelper sharedInstance];
 	identifier = initId;
+	[identifier retain];
 	name = initName;
+	[name retain];
 	path = initPath;
+	[path retain];
 	selectedFileExtensions = initExtensions;
+	[selectedFileExtensions retain];
 	emulatorRunning = NO;
 	tappedOnce = NO;
-
+	
 	[self addLabel:@"com.bgan1982.Emulators.EmulatorsApplianceMenuController"];
 	[self setListTitle:[NSString stringWithFormat:@"%@ ROMs", name]];
 
@@ -94,38 +97,59 @@
 
 	id list = [self list];
 	[list setDatasource: self];
-	
-	return returnid;
+	return self;
+}
+
+- (void)dealloc
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - dealloc");
+	tappedOnce = NO;
+	[identifier release];
+	[name release];
+	[path release];
+	[selectedFileExtensions release];
+	if (startupScript != nil) [startupScript release];
+	if (upScript != nil) [upScript release];
+	if (downScript != nil) [downScript release];
+	if (leftScript != nil) [leftScript release];
+	if (rightScript != nil) [rightScript release];
+	[super dealloc];
+	[helper showFrontRow];
 }
 
 - (void)setStartupScript:(NSString *)aScript
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setStartupScript");
 	startupScript = aScript;
+	[startupScript retain];
 }
 
 - (void)setUpScript:(NSString *)aScript
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setUpScript");
 	upScript = aScript;
+	[upScript retain];
 }
 
 - (void)setDownScript:(NSString *)aScript
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setDownScript");
 	downScript = aScript;
+	[downScript retain];
 }
 
 - (void)setLeftScript:(NSString *)aScript
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setLeftScript");
 	leftScript = aScript;
+	[leftScript retain];
 }
 
 - (void)setRightScript:(NSString *)aScript
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setRightScript");
 	rightScript = aScript;
+	[rightScript retain];
 }
 
 - (long)defaultIndex
@@ -164,23 +188,21 @@
 		[[NSFileManager defaultManager] fileExistsAtPath:pathToROM isDirectory:&isDir];
 		if (isDir)
 		{
-			// This doesn't work at the moment...
-			/*
 			pathToROM = [pathToROM stringByAppendingString:@"/"];
-			if (DEBUG_MODE) NSLog(@"itemSelected - Creating new EmulatorsApplianceMenuController for %@",pathToROM);
-			EmulatorsApplianceMenuController *menu = [[EmulatorsApplianceMenuController alloc] 
-				initWithIdentifier:identifier withName:name withPath:pathToROM withExtensions:selectedFileExtensions];
 			
+			if (DEBUG_MODE) NSLog(@"itemSelected - Creating new EmulatorsApplianceMenuController for %@",pathToROM);
+			EmulatorsApplianceMenuController *menu = 
+				[[EmulatorsApplianceMenuController alloc] 
+					initWithIdentifier:identifier withName:name withPath:pathToROM withExtensions:selectedFileExtensions];
+			 
 			if (startupScript != nil) [menu setStartupScript:startupScript];
 			if (upScript != nil) [menu setUpScript:upScript];
 			if (downScript != nil) [menu setDownScript:downScript];
 			if (leftScript != nil) [menu setLeftScript:leftScript];
 			if (rightScript != nil) [menu setRightScript:rightScript];
-			
-			if (DEBUG_MODE) NSLog(@"itemSelected - pushing onto stack");
+
+			if (DEBUG_MODE) NSLog(@"itemSelected - Pushing new controller onto stack");
 			[[self stack] pushController:menu];
-			*/
-			
 			return;
 		}
 		
@@ -193,7 +215,7 @@
 		
 		if (! emulatorRunning)
 		{
-			[helper showFrontRow ];
+			[helper showFrontRow];
 			BRAlertController *alert = [BRAlertController alertOfType:0
 				titled:@"Error"
 				primaryText:[NSString stringWithFormat:@"%@ could not be opened",identifier]
@@ -202,6 +224,11 @@
 			return;
 		}
 
+		if (DEBUG_MODE) NSLog(@"itemSelected - SavePathToROM");
+		NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+		[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"SavePathToROM" ofType:@"sh"] 
+								 arguments:[NSArray arrayWithObjects:path, nil]];
+		
 		[helper hideFrontRowSetResponderTo:self];
 		
 		if (startupScript != nil) [self runAppleScript:startupScript];
@@ -257,10 +284,15 @@
 		NSLog(@"killEmulatorAndShowFrontRow : killing pid %i",emuPID);
 		[NSTask launchedTaskWithLaunchPath:@"/bin/kill"
 								 arguments:[NSArray arrayWithObjects:[NSString stringWithFormat:@"%i",emuPID],nil]];
+
+		if (DEBUG_MODE) NSLog(@"killEmulatorAndShowFrontRow - ForgetPathToROM");
+		NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+		[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"ForgetPathToROM" ofType:@"sh"] 
+								 arguments:[NSArray arrayWithObjects:nil]];
 	}
 	emulatorRunning = NO;
 	
-	NSDate *future = [NSDate dateWithTimeIntervalSinceNow: 1.0];
+	NSDate *future = [NSDate dateWithTimeIntervalSinceNow: 0.5];
 	[NSThread sleepUntilDate:future];
 	
 	[helper showFrontRow];
@@ -331,7 +363,7 @@
 				if (DEBUG_MODE) NSLog(@"brEventAction: tap menu -- quitting emulator");
 				
 				[self killEmulatorAndShowFrontRow];
-				[[self stack] popController];
+				//[[self stack] popController];
 				tappedOnce = NO;
 				
 				return YES;

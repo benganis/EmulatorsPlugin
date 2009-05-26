@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3E18541A0F4781570070BEED /* EmulatorsOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1854190F4781570070BEED /* EmulatorsOptionsController.m */; };
+		3E5A56090FC8E44100DBBD9A /* BackRow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A56080FC8E44100DBBD9A /* BackRow.framework */; };
 		3E7C06630E25396600546305 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7C06620E25396600546305 /* QuartzCore.framework */; };
 		3EB2F5690F3D5C2F003E095D /* EmulatorsAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2F5680F3D5C2F003E095D /* EmulatorsAlertController.m */; };
-		3EC3BB7F0F833CEF0086EA6C /* BackRow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3BB7E0F833CEF0086EA6C /* BackRow.framework */; };
 		3EC821FE0F9137420037ACA2 /* com.bannister.boycottadvance.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EC821F80F9137420037ACA2 /* com.bannister.boycottadvance.plist */; };
 		3EC821FF0F9137420037ACA2 /* com.bannister.genesisplus.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EC821F90F9137420037ACA2 /* com.bannister.genesisplus.plist */; };
 		3EC822000F9137420037ACA2 /* com.bannister.mugrat.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EC821FA0F9137420037ACA2 /* com.bannister.mugrat.plist */; };
@@ -22,6 +22,8 @@
 		3EC8220D0F91375F0037ACA2 /* KillFinder.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3EC822090F91375F0037ACA2 /* KillFinder.sh */; };
 		3EC8220E0F91375F0037ACA2 /* RebuildLaunchServices.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3EC8220A0F91375F0037ACA2 /* RebuildLaunchServices.sh */; };
 		3ED7C1D20F365DA90006BC70 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3ED7C1D10F365DA90006BC70 /* defaults.plist */; };
+		3EDA34040FCB73C000556B9E /* SavePathToROM.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA34030FCB73C000556B9E /* SavePathToROM.sh */; };
+		3EDA34060FCB76C400556B9E /* ForgetPathToROM.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA34050FCB76C400556B9E /* ForgetPathToROM.sh */; };
 		3EE6FE210E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6FE200E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m */; };
 		5EB6B1FD0F6A81E000EC5314 /* BackRowHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -36,10 +38,10 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		3E1854180F4781570070BEED /* EmulatorsOptionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsOptionsController.h; sourceTree = "<group>"; };
 		3E1854190F4781570070BEED /* EmulatorsOptionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsOptionsController.m; sourceTree = "<group>"; };
+		3E5A56080FC8E44100DBBD9A /* BackRow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackRow.framework; path = ../BackRow.framework; sourceTree = SOURCE_ROOT; };
 		3E7C06620E25396600546305 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		3EB2F5670F3D5C2F003E095D /* EmulatorsAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsAlertController.h; sourceTree = "<group>"; };
 		3EB2F5680F3D5C2F003E095D /* EmulatorsAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsAlertController.m; sourceTree = "<group>"; };
-		3EC3BB7E0F833CEF0086EA6C /* BackRow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackRow.framework; path = ../BackRow.framework; sourceTree = SOURCE_ROOT; };
 		3EC821F80F9137420037ACA2 /* com.bannister.boycottadvance.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = com.bannister.boycottadvance.plist; sourceTree = "<group>"; };
 		3EC821F90F9137420037ACA2 /* com.bannister.genesisplus.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = com.bannister.genesisplus.plist; sourceTree = "<group>"; };
 		3EC821FA0F9137420037ACA2 /* com.bannister.mugrat.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = com.bannister.mugrat.plist; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		3EC822090F91375F0037ACA2 /* KillFinder.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = KillFinder.sh; sourceTree = "<group>"; };
 		3EC8220A0F91375F0037ACA2 /* RebuildLaunchServices.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = RebuildLaunchServices.sh; sourceTree = "<group>"; };
 		3ED7C1D10F365DA90006BC70 /* defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
+		3EDA34030FCB73C000556B9E /* SavePathToROM.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = SavePathToROM.sh; sourceTree = "<group>"; };
+		3EDA34050FCB76C400556B9E /* ForgetPathToROM.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ForgetPathToROM.sh; sourceTree = "<group>"; };
 		3EE6FE1F0E11DBC000C50DF2 /* EmulatorsApplianceMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsApplianceMenuController.h; sourceTree = "<group>"; };
 		3EE6FE200E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsApplianceMenuController.m; sourceTree = "<group>"; };
 		5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackRowHelper.m; sourceTree = "<group>"; };
@@ -69,7 +73,7 @@
 			files = (
 				8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */,
 				3E7C06630E25396600546305 /* QuartzCore.framework in Frameworks */,
-				3EC3BB7F0F833CEF0086EA6C /* BackRow.framework in Frameworks */,
+				3E5A56090FC8E44100DBBD9A /* BackRow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +132,7 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3EC3BB7E0F833CEF0086EA6C /* BackRow.framework */,
+				3E5A56080FC8E44100DBBD9A /* BackRow.framework */,
 				3E7C06620E25396600546305 /* QuartzCore.framework */,
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
 			);
@@ -173,6 +177,8 @@
 				3EC822080F91375F0037ACA2 /* EnableUIScripting.sh */,
 				3EC822090F91375F0037ACA2 /* KillFinder.sh */,
 				3EC8220A0F91375F0037ACA2 /* RebuildLaunchServices.sh */,
+				3EDA34030FCB73C000556B9E /* SavePathToROM.sh */,
+				3EDA34050FCB76C400556B9E /* ForgetPathToROM.sh */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -232,6 +238,8 @@
 				3EC8220C0F91375F0037ACA2 /* EnableUIScripting.sh in Resources */,
 				3EC8220D0F91375F0037ACA2 /* KillFinder.sh in Resources */,
 				3EC8220E0F91375F0037ACA2 /* RebuildLaunchServices.sh in Resources */,
+				3EDA34040FCB73C000556B9E /* SavePathToROM.sh in Resources */,
+				3EDA34060FCB76C400556B9E /* ForgetPathToROM.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
