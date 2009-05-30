@@ -46,6 +46,7 @@
 
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	long i, count = [[fileManager directoryContentsAtPath:path] count];
+	if (count > 100) count = 100;
 
 	for ( i = 0; i < count; i++ )
 	{
@@ -161,19 +162,26 @@
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - previewControlForItem, row=%i",fp8);
 
-	NSString *imageExtension = @".png";
-	NSString *imagePath = [[path stringByAppendingPathComponent:[[_fileListArray objectAtIndex:fp8]
-								stringByDeletingPathExtension]] stringByAppendingString:imageExtension];
-	BOOL isDir = false;
-	BOOL imageExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:&isDir];
-	
-	BRImageControl *imageControl = [[BRImageControl alloc] init];
-	if (imageExists)
+	NSArray *extensionsArray = [NSArray arrayWithObjects:@".png", @".jpg", nil];
+	NSEnumerator *enumerator = [extensionsArray objectEnumerator];
+
+	id imageExtension;
+	while((imageExtension = [enumerator nextObject]) != nil)
 	{
-		if (DEBUG_MODE) NSLog(@"previewControlForItem - ImagePath=%@",imagePath);
-		[imageControl setImage:[BRImage imageWithPath:imagePath]];
+		NSString *imagePath = [[path stringByAppendingPathComponent:[[_fileListArray objectAtIndex:fp8]
+									stringByDeletingPathExtension]] stringByAppendingString:imageExtension];
+		BOOL isDir = false;
+		BOOL imageExists = [[NSFileManager defaultManager] fileExistsAtPath:imagePath isDirectory:&isDir];
+		
+		if ((imageExists) && !(isDir))
+		{
+			if (DEBUG_MODE) NSLog(@"previewControlForItem - ImagePath=%@",imagePath);
+			BRImageControl *imageControl = [[BRImageControl alloc] init];
+			[imageControl setImage:[BRImage imageWithPath:imagePath]];
+			return imageControl;
+		}
 	}
-	return imageControl;
+	return nil;
 }
 
 - (void)itemSelected:(long)fp8
@@ -291,9 +299,6 @@
 								 arguments:[NSArray arrayWithObjects:nil]];
 	}
 	emulatorRunning = NO;
-	
-	NSDate *future = [NSDate dateWithTimeIntervalSinceNow: 0.5];
-	[NSThread sleepUntilDate:future];
 	
 	[helper showFrontRow];
 	tappedOnce = NO;
