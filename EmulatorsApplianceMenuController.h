@@ -27,6 +27,7 @@
 
 	BOOL emulatorRunning;
 	BOOL tappedOnce;
+	long prevCount;
 	NSString *selectedFilename;
 
 	NSWorkspace *workspace;
@@ -38,6 +39,7 @@
 
 - (id)initWithIdentifier:(NSString *)initId withName:(NSString *)initName withPath:(NSString *)initPath 
 		  withExtensions:(NSArray *)initExtensions;
+- (void)listMoreFiles;
 - (void)setStartupScript:(NSString *)aScript;
 - (void)setUpScript:(NSString *)aScript;
 - (void)setDownScript:(NSString *)aScript;

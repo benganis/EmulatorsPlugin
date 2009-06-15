@@ -35,6 +35,7 @@
 	[path retain];
 	selectedFileExtensions = initExtensions;
 	[selectedFileExtensions retain];
+	prevCount = 0;
 	emulatorRunning = NO;
 	tappedOnce = NO;
 	
@@ -44,18 +45,58 @@
 	_items = [[NSMutableArray alloc] initWithObjects:nil];
 	_fileListArray = [[NSMutableArray alloc] initWithObjects:nil];
 
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	long i, count = [[fileManager directoryContentsAtPath:path] count];
-	if (count > 100) count = 100;
+	[self listMoreFiles];
 
-	for ( i = 0; i < count; i++ )
+	// id list = [self list];
+	// [list setDatasource: self];
+
+	return self;
+}
+
+- (void)listMoreFiles
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - listFiles");
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	long i, currCount;
+	BOOL addMoreItem = false;
+	long totalCount = [[fileManager directoryContentsAtPath:path] count];
+	
+	if (totalCount <= prevCount) return;
+	
+	id list = [self list];
+	id selObject = [self selectedObject]; 
+	[list setDatasource: nil];
+
+	// Remove the "More..." item
+	if ((prevCount > 0) && ([[_fileListArray lastObject] isEqualToString:@"###More###"]))
+	{
+		[_fileListArray removeLastObject];
+		[_items removeLastObject];
+	}
+
+	currCount = totalCount;
+	
+//	if (totalCount <= (prevCount + 100))
+//	{
+//		currCount = totalCount - prevCount;
+//	}
+//	else
+//	{
+//		currCount = prevCount + 100;
+//		addMoreItem = true;
+//	}
+
+	if (DEBUG_MODE) NSLog(@"listFiles - totalCount=%i, prevCount=%i, currCount=%i",totalCount,prevCount,currCount);
+	
+	for ( i = prevCount; i < currCount; i++ )
 	{
 		// idStr is the actual filename
 		NSString *idStr = [[fileManager directoryContentsAtPath:path] objectAtIndex:i];
 		NSString *extension = [[idStr pathExtension] lowercaseString];
 		BOOL isDir = false;
 		[[NSFileManager defaultManager] fileExistsAtPath:[path stringByAppendingPathComponent:idStr]
-														   isDirectory:&isDir];
+											 isDirectory:&isDir];
 		
 		if (isDir)
 		{
@@ -68,7 +109,7 @@
 		{
 			BOOL addCurrentFile = true;
 			NSString *fileName;		// fileName is what will be displayed in the menu
-
+			
 			if (selectedFileExtensions != nil)	// if only certain file extensions are enabled, then other files will be hidden
 			{
 				if ( [selectedFileExtensions containsObject:extension] )
@@ -95,15 +136,24 @@
 			}
 		}
 	}
-
-	id list = [self list];
+	if (addMoreItem)
+	{
+		NSString *moreItem = @"###More###";
+		[_fileListArray addObject:moreItem];
+		id item = [BRTextMenuItemLayer menuItem];
+		[item setTitle:@"More..."];
+		[_items addObject:item];
+	}
+	
 	[list setDatasource: self];
-	return self;
+	[self setSelectedObject:selObject];
+	prevCount = currCount;
 }
 
 - (void)dealloc
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - dealloc");
+	
 	tappedOnce = NO;
 	[identifier release];
 	[name release];
@@ -191,6 +241,11 @@
 	if (! emulatorRunning)
 	{
 		selectedFilename = [_fileListArray objectAtIndex:fp8];
+		if ([selectedFilename isEqualToString:@"###More###"])
+		{
+			[self listMoreFiles];
+			return;
+		}
 		NSString *pathToROM = [path stringByAppendingPathComponent:selectedFilename];
 		BOOL isDir = false;
 		[[NSFileManager defaultManager] fileExistsAtPath:pathToROM isDirectory:&isDir];
