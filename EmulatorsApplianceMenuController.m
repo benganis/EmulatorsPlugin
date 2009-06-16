@@ -58,9 +58,24 @@
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - listFiles");
 	
 	NSFileManager *fileManager = [NSFileManager defaultManager];
-	long i, currCount;
+	NSMutableArray *dirContents = [NSMutableArray arrayWithArray:[fileManager directoryContentsAtPath:path]];
+	long i, currCount, temp;
 	BOOL addMoreItem = false;
-	long totalCount = [[fileManager directoryContentsAtPath:path] count];
+	long totalCount = [dirContents count];
+	
+	// Remove hidden files and images from directory list
+	temp=totalCount;
+	for(i=totalCount-1; i>=0; i--)
+	{
+		NSString *idStr = [dirContents objectAtIndex:i];
+		NSString *extension = [[idStr pathExtension] lowercaseString];
+		if (([idStr hasPrefix:@"."]) || ([extension isEqualToString:@"jpg"]) || ([extension isEqualToString:@"png"]))
+		{
+			[dirContents removeObjectAtIndex:i];
+			temp--;
+		}
+	}
+	totalCount=temp;
 	
 	if (totalCount <= prevCount) return;
 	
@@ -77,22 +92,21 @@
 
 	currCount = totalCount;
 	
-//	if (totalCount <= (prevCount + 100))
-//	{
-//		currCount = totalCount - prevCount;
-//	}
-//	else
-//	{
-//		currCount = prevCount + 100;
-//		addMoreItem = true;
-//	}
+	if (totalCount <= (prevCount + 100))
+	{
+		currCount = totalCount - prevCount;
+	}
+	else
+	{
+		currCount = prevCount + 100;
+		addMoreItem = true;
+	}
 
 	if (DEBUG_MODE) NSLog(@"listFiles - totalCount=%i, prevCount=%i, currCount=%i",totalCount,prevCount,currCount);
 	
 	for ( i = prevCount; i < currCount; i++ )
 	{
-		// idStr is the actual filename
-		NSString *idStr = [[fileManager directoryContentsAtPath:path] objectAtIndex:i];
+		NSString *idStr = [dirContents objectAtIndex:i];
 		NSString *extension = [[idStr pathExtension] lowercaseString];
 		BOOL isDir = false;
 		[[NSFileManager defaultManager] fileExistsAtPath:[path stringByAppendingPathComponent:idStr]
@@ -105,7 +119,7 @@
 			[item setTitle:idStr];
 			[_items addObject:item];
 		}
-		else if ((! [idStr hasPrefix:@"."]) && (! [extension isEqualToString:@"jpg"]) && (! [extension isEqualToString:@"png"]))
+		else
 		{
 			BOOL addCurrentFile = true;
 			NSString *fileName;		// fileName is what will be displayed in the menu
@@ -167,6 +181,15 @@
 	[super dealloc];
 	[helper showFrontRow];
 }
+
+/*
+- (void)controlWasDeactivated
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - controlWasDeactivated");
+	[super controlWasDeactivated];
+	[[self stack] removeController:self];
+}
+*/
 
 - (void)setStartupScript:(NSString *)aScript
 {
