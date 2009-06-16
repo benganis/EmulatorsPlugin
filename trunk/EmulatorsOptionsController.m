@@ -107,11 +107,11 @@
 	destination = [@"~/Library/Preferences/net.mame.mameosx.plist" stringByExpandingTildeInPath];
 	[fileManager removeFileAtPath:destination handler:nil];
 	[fileManager copyPath:source toPath:destination handler:nil];
-	/*
+	
 	BRAlertController *alert = [BRAlertController alertOfType:0 titled:@""
 			primaryText:@"Emulator preferences have been reset." secondaryText:@""];
 	[[self stack] pushController:alert];
-	*/
+
 }
 
 - (void)resetPlugInPreferences
@@ -148,6 +148,7 @@
 - (void)killFinder
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - killFinder");
+	[[BackRowHelper sharedInstance] hideFrontRowSetResponderTo:self];
 	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"KillFinder" ofType:@"sh"]
 							 arguments:[NSArray arrayWithObjects:nil]];
 }

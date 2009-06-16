@@ -105,8 +105,8 @@
 	// If path is non-existent or blank, launch app without bringing up ROM list
 	if ((path == nil) || ([path length] == 0))
 	{
-		EmulatorsAlertController *alert;
-		alert = [[EmulatorsAlertController alloc] initWithType:0 titled:identifier primaryText:@"" secondaryText:@""];
+		EmulatorsAlertController *alert = 
+			[[EmulatorsAlertController alloc] initWithType:0 titled:identifier primaryText:@"" secondaryText:@""];
 		
 		BOOL success = [alert runEmulatorWithIdentifier:identifier withName:name];
 		if (! success)

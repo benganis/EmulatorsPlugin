@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 #import <BackRow/BackRow.h>
+#import <BackRowHelper.h>
 
 @interface EmulatorsOptionsController : BRMenuController
 {
