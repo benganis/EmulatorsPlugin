@@ -46,6 +46,17 @@
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - dealloc");
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
+	[[self list] setDatasource: nil];
+	
+	id obj;
+	while((obj = [[_items objectEnumerator] nextObject]) != nil)
+		[_items removeObject:obj];
+	while((obj = [[_fileListArray objectEnumerator] nextObject]) != nil)
+		[_fileListArray removeObject:obj];
+	[_items release];
+	[_fileListArray release];
+	
 	[super dealloc];  
 }
 

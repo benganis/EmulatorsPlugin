@@ -19,7 +19,7 @@
 	tappedOnce = NO;
 	helper = [BackRowHelper sharedInstance];
 
-	NSLog(@"Opening application %@",identifier);
+	NSLog(@"runEmulatorWithIdentifier - opening application %@",identifier);
 	BOOL emulatorRunning = [workspace launchApplication:identifier];
 	if (emulatorRunning) [helper hideFrontRowSetResponderTo:self];
 	
@@ -30,60 +30,60 @@
 	return emulatorRunning;
 }
 
+- (void)setAltIdentifier:(NSString *)altId
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsAlertController - setAltIdentifier");
+	altIdentifier = altId;
+}
+
 - (void)setUpScript:(NSString *)aScript
 {
-	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setUpScript");
+	if (DEBUG_MODE) NSLog(@"EmulatorsAlertController - setUpScript");
 	upScript = aScript;
 }
 
 - (void)setDownScript:(NSString *)aScript
 {
-	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setDownScript");
+	if (DEBUG_MODE) NSLog(@"EmulatorsAlertController - setDownScript");
 	downScript = aScript;
 }
 
 - (void)setLeftScript:(NSString *)aScript
 {
-	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setLeftScript");
+	if (DEBUG_MODE) NSLog(@"EmulatorsAlertController - setLeftScript");
 	leftScript = aScript;
 }
 
 - (void)setRightScript:(NSString *)aScript
 {
-	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setRightScript");
+	if (DEBUG_MODE) NSLog(@"EmulatorsAlertController - setRightScript");
 	rightScript = aScript;
 }
 
 
 - (int)getEmulatorPID
 {
-	int thePID=0;
-	NSString *ident;
-	
-	// Bad hack because 'zsnes.app' launches 'ZSNES' process
-	if ([identifier isEqualToString:@"zsnes"])
-	{
-		ident = @"ZSNES";
-	}
-	else
-	{
-		ident = identifier;
-	}
+	int thePID = 0;
 	
 	NSArray *apps = [workspace valueForKeyPath:@"launchedApplications.NSApplicationName"];
 	NSArray *pids = [workspace valueForKeyPath:@"launchedApplications.NSApplicationProcessIdentifier"];
-	// if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@",apps]);
-	// if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@",pids]);
+	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@",apps]);
+	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@",pids]);
 	
 	int i;
 	for (i=0; i<[apps count]; i++)
 	{
-		if ([ident isEqualToString:[apps objectAtIndex:i]])
+		if ([identifier isEqualToString:[apps objectAtIndex:i]])
+		{
+			thePID = [[pids objectAtIndex:i] intValue];
+		}
+		else if ([altIdentifier isEqualToString:[apps objectAtIndex:i]])
 		{
 			thePID = [[pids objectAtIndex:i] intValue];
 		}
 	}
-	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"getEmulatorPID:%@ returned %i",ident,thePID]);
+	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"EmulatorsAlertController - getEmulatorPID: %@ returned %i",
+						   identifier,thePID]);
 	return thePID;
 }
 
@@ -190,6 +190,8 @@
 			NSLog(@"runAppleScript returned: %@",[subDescriptor stringValue]);
 		}
 	}
+	[theScript release];
+	[error release];
 }
 
 @end

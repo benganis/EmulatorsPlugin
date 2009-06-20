@@ -15,6 +15,7 @@
 	int padding[16];	// credit is due here to SapphireCompatibilityClasses!!
 
 	NSString *identifier;
+	NSString *altIdentifier;
 	NSString *name;
 	NSString *path;
 	NSString *startupScript;
@@ -28,6 +29,7 @@
 	BOOL emulatorRunning;
 	BOOL tappedOnce;
 	long prevCount;
+	long startCount;
 	NSString *selectedFilename;
 
 	NSWorkspace *workspace;
@@ -40,6 +42,8 @@
 - (id)initWithIdentifier:(NSString *)initId withName:(NSString *)initName withPath:(NSString *)initPath 
 		  withExtensions:(NSArray *)initExtensions;
 - (void)listMoreFiles;
+- (void)clearFileList;
+- (void)setAltIdentifier:(NSString *)altId;
 - (void)setStartupScript:(NSString *)aScript;
 - (void)setUpScript:(NSString *)aScript;
 - (void)setDownScript:(NSString *)aScript;

@@ -75,6 +75,7 @@
 	NSArray *applianceCategoryArray = [defaultDictionary objectForKey:@"FRApplianceCategoryDescriptors"];
 	NSEnumerator *enumerator = [applianceCategoryArray objectEnumerator];
 	
+	NSString *altIdentifier;
 	NSString *path;
 	NSString *name;
 	NSString *startupScript;
@@ -89,6 +90,7 @@
 	{
 		if ([identifier isEqualToString:[obj valueForKey:@"identifier"]])
 		{
+			altIdentifier = [obj valueForKey:@"alt-identifier"];
 			path = [obj valueForKey:@"path"];
 			name = [obj valueForKey:@"name"];
 			startupScript = [obj valueForKey:@"startup-script"];
@@ -116,6 +118,7 @@
 		}
 		else
 		{
+			if (altIdentifier != nil) [alert setAltIdentifier: altIdentifier];
 			if (upScript != nil) [alert setUpScript: upScript];
 			if (downScript != nil) [alert setDownScript: downScript];
 			if (leftScript != nil) [alert setLeftScript: leftScript];
@@ -144,9 +147,10 @@
 	
 	// Display a menu for path directory
 	EmulatorsApplianceMenuController *menu = 
-		[[EmulatorsApplianceMenuController alloc] 
-			initWithIdentifier:identifier withName:name withPath:path withExtensions:fileExtensions];
+		[[EmulatorsApplianceMenuController alloc] initWithIdentifier:identifier withName:name 
+															withPath:path withExtensions:fileExtensions];
 
+	if (altIdentifier != nil) [menu setAltIdentifier: altIdentifier];
 	if (startupScript != nil) [menu setStartupScript: startupScript];
 	if (upScript != nil) [menu setUpScript: upScript];
 	if (downScript != nil) [menu setDownScript: downScript];
