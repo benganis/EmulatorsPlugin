@@ -24,14 +24,18 @@
 	NSString *leftScript;
 	NSString *rightScript;
 	NSArray *selectedFileExtensions;
-	BackRowHelper *helper;
 
+	// State variables
 	BOOL emulatorRunning;
 	BOOL tappedOnce;
+	BOOL menuLoaded;
 	long prevCount;
 	long startCount;
 	NSString *selectedFilename;
-
+	long lastSelectedRow;
+	NSMutableDictionary *childControllers;
+	
+	BackRowHelper *helper;
 	NSWorkspace *workspace;
 
 	// Data source variables:

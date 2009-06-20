@@ -25,8 +25,6 @@
 	self = [super init];
 	if (self == nil) return nil;
 	
-	workspace = [NSWorkspace sharedWorkspace];
-	helper = [BackRowHelper sharedInstance];
 	identifier = initId;
 	[identifier retain];
 	altIdentifier = nil;
@@ -36,16 +34,23 @@
 	[path retain];
 	selectedFileExtensions = initExtensions;
 	[selectedFileExtensions retain];
+
 	prevCount = 0;
+	lastSelectedRow = 0;
 	emulatorRunning = NO;
 	tappedOnce = NO;
+	menuLoaded = NO;
+	childControllers = [[NSMutableDictionary alloc] init];
+	
+	workspace = [NSWorkspace sharedWorkspace];
+	helper = [BackRowHelper sharedInstance];
 	
 	[self addLabel:@"com.bgan1982.Emulators.EmulatorsApplianceMenuController"];
 	[self setListTitle:[NSString stringWithFormat:@"%@ ROMs", name]];
 
 	_items = [[NSMutableArray alloc] initWithObjects:nil];
 	_fileListArray = [[NSMutableArray alloc] initWithObjects:nil];
-
+	
 	return self;
 }
 
@@ -87,13 +92,13 @@
 	currCount = totalCount;
 	
 	/*
-	if (totalCount <= (prevCount + 100))
+	if (totalCount <= (prevCount + 250))
 	{
 		currCount = totalCount - prevCount;
 	}
 	else
 	{
-		currCount = prevCount + 100;
+		currCount = prevCount + 250;
 		addMoreItem = true;
 	}
 	*/
@@ -114,7 +119,6 @@
 			id item = [BRTextMenuItemLayer folderMenuItem];
 			[item setTitle:idStr];
 			[_items addObject:item];
-			NSLog(@"blarg1");
 		}
 		else
 		{
@@ -135,7 +139,6 @@
 			else	// otherwise, set the menu entry to the whole filename
 			{
 				fileName = [idStr copy];
-				NSLog(@"blarg2");
 			}
 			
 			// create a new menu item and set the filename
@@ -145,7 +148,6 @@
 				id item = [BRTextMenuItemLayer menuItem];
 				[item setTitle:fileName];
 				[_items addObject:item];
-				NSLog(@"blarg3");
 			}
 		}
 	}
@@ -158,11 +160,14 @@
 		[_items addObject:item];
 	}
 	
-	NSLog(@"blarg4");
 	[[self list] setDatasource: self];
-	[self refreshControllerForModelUpdate];
+	if (! menuLoaded) { menuLoaded = YES; }
+	if (lastSelectedRow > [_items count]-1) { lastSelectedRow = [_items count]-1; }
+	
+	if (DEBUG_MODE) NSLog(@"listMoreFiles - Setting selected object to %i",lastSelectedRow);
+	[(BRListControl *)[self list] setSelection:lastSelectedRow];
+
 	prevCount = currCount;
-    NSLog(@"blarg5");
 }
 
 - (void)dealloc
@@ -185,6 +190,15 @@
 	[_items release];
 	[_fileListArray release];
 	
+	id key;
+	while((key = [[[childControllers allKeys] objectEnumerator] nextObject]) != nil)
+	{
+		id controller = [childControllers objectForKey:key];
+		[childControllers removeObjectForKey:key];
+		[controller release];
+	}
+	[childControllers release];
+	
 	[super dealloc];
 	[helper showFrontRow];
 }
@@ -194,7 +208,8 @@
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - clearFileList");
 	
 	[[self list] setDatasource: nil];
-	[self refreshControllerForModelUpdate];
+	menuLoaded = NO;
+	//[self refreshControllerForModelUpdate];
 	
 	id obj;
 	while((obj = [[_items objectEnumerator] nextObject]) != nil)
@@ -207,18 +222,14 @@
 - (void)controlWasActivated
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - controlWasActivated");
-	
 	[self listMoreFiles];
-	
 	[super controlWasActivated];
 }
 
 - (void)controlWasDeactivated
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - controlWasDeactivated");
-	
 	[self clearFileList];
-	
 	[super controlWasDeactivated];
 }
 
@@ -272,8 +283,10 @@
 
 - (id)previewControlForItem:(long)fp8
 {
+	if (! menuLoaded) { return nil; }
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - previewControlForItem, row=%i",fp8);
-	if ([_fileListArray count]==0) return nil;
+	
+	lastSelectedRow = fp8;
 
 	NSArray *extensionsArray = [NSArray arrayWithObjects:@".png", @".jpg", nil];
 	NSEnumerator *enumerator = [extensionsArray objectEnumerator];
@@ -316,19 +329,29 @@
 		{
 			pathToROM = [pathToROM stringByAppendingString:@"/"];
 			
-			if (DEBUG_MODE) NSLog(@"itemSelected - Creating new EmulatorsApplianceMenuController for %@",pathToROM);
-			EmulatorsApplianceMenuController *menu = 
-				[[EmulatorsApplianceMenuController alloc] 
-					initWithIdentifier:identifier withName:name withPath:pathToROM withExtensions:selectedFileExtensions];
+			EmulatorsApplianceMenuController *menu;
 			
-			if (altIdentifier != nil) [menu setAltIdentifier:altIdentifier];
-			if (startupScript != nil) [menu setStartupScript:startupScript];
-			if (upScript != nil) [menu setUpScript:upScript];
-			if (downScript != nil) [menu setDownScript:downScript];
-			if (leftScript != nil) [menu setLeftScript:leftScript];
-			if (rightScript != nil) [menu setRightScript:rightScript];
-
-			if (DEBUG_MODE) NSLog(@"itemSelected - Pushing new controller onto stack");
+			menu = [childControllers objectForKey:pathToROM];
+			
+			if (menu != nil)
+			{
+				if (DEBUG_MODE) NSLog(@"itemSelected - Found previous controller with pathToROM=%@",pathToROM);
+			}
+			else
+			{
+				if (DEBUG_MODE) NSLog(@"itemSelected - Creating new EmulatorsApplianceMenuController for %@",pathToROM);
+				menu = [[EmulatorsApplianceMenuController alloc] initWithIdentifier:identifier withName:name 
+													withPath:pathToROM withExtensions:selectedFileExtensions];
+				[childControllers setValue:menu forKey:pathToROM];
+				
+				if (altIdentifier != nil) [menu setAltIdentifier:altIdentifier];
+				if (startupScript != nil) [menu setStartupScript:startupScript];
+				if (upScript != nil) [menu setUpScript:upScript];
+				if (downScript != nil) [menu setDownScript:downScript];
+				if (leftScript != nil) [menu setLeftScript:leftScript];
+				if (rightScript != nil) [menu setRightScript:rightScript];
+			}
+			if (DEBUG_MODE) NSLog(@"itemSelected - Pushing controller onto stack");
 			[[self stack] pushController:menu];
 			return;
 		}
@@ -376,11 +399,11 @@
 	BOOL checkAltId;
 	if (altIdentifier != nil)
 	{
-		checkAltId = TRUE;
+		checkAltId = YES;
 	}
 	else
 	{
-		checkAltId = FALSE;
+		checkAltId = NO;
 	}
 
 	NSArray *apps = [workspace valueForKeyPath:@"launchedApplications.NSApplicationName"];

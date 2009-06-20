@@ -64,6 +64,15 @@
 - (int)getEmulatorPID
 {
 	int thePID = 0;
+	BOOL checkAltId;
+	if (altIdentifier != nil)
+	{
+		checkAltId = YES;
+	}
+	else
+	{
+		checkAltId = NO;
+	}
 	
 	NSArray *apps = [workspace valueForKeyPath:@"launchedApplications.NSApplicationName"];
 	NSArray *pids = [workspace valueForKeyPath:@"launchedApplications.NSApplicationProcessIdentifier"];
@@ -77,15 +86,19 @@
 		{
 			thePID = [[pids objectAtIndex:i] intValue];
 		}
-		else if ([altIdentifier isEqualToString:[apps objectAtIndex:i]])
+		else if (checkAltId)
 		{
-			thePID = [[pids objectAtIndex:i] intValue];
+			if ([altIdentifier isEqualToString:[apps objectAtIndex:i]])
+			{
+				thePID = [[pids objectAtIndex:i] intValue];
+			}
 		}
 	}
 	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"EmulatorsAlertController - getEmulatorPID: %@ returned %i",
 						   identifier,thePID]);
 	return thePID;
 }
+
 
 - (BOOL)brEventAction:(id)event
 {	
