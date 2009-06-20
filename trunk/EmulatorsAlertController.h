@@ -15,6 +15,7 @@
 {
 	int padding[16];
 	NSString *identifier;
+	NSString *altIdentifier;
 	NSString *name;
 	NSString *upScript;
 	NSString *downScript;
@@ -31,6 +32,7 @@
 
 
 - (BOOL)runEmulatorWithIdentifier:(NSString *)aIdentifier withName:(NSString *)aName;
+- (void)setAltIdentifier:(NSString *)altId;
 - (void)setUpScript:(NSString *)aScript;
 - (void)setDownScript:(NSString *)aScript;
 - (void)setLeftScript:(NSString *)aScript;

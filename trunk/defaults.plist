@@ -11,17 +11,19 @@
 			<key>name</key>
 			<string>Terminal</string>
 			<key>preferred-order</key>
-			<integer>98</integer>
+			<integer>201</integer>
 			<key>path</key>
 			<string></string>
 		</dict>
 		<dict>
 			<key>identifier</key>
 			<string>FireFox</string>
+			<key>alt-identifier</key>
+			<string>firefox-bin</string>
 			<key>name</key>
 			<string>FireFox</string>
 			<key>preferred-order</key>
-			<integer>99</integer>
+			<integer>202</integer>
 			<key>path</key>
 			<string></string>
 		</dict>
@@ -84,6 +86,8 @@
 		<dict>
 			<key>identifier</key>
 			<string>zsnes</string>
+			<key>alt-identifier</key>
+			<string>ZSNES</string>
 			<key>name</key>
 			<string>Super Nintendo</string>
 			<key>preferred-order</key>

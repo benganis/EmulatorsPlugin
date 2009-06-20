@@ -16,8 +16,8 @@
 }
 
 // My initialization routine
-- (id)initWithIdentifier:(NSString *)initId withName:(NSString *)initName withPath:(NSString *)initPath 
-		  withExtensions:(NSArray *)initExtensions;
+- (id)initWithIdentifier:(NSString *)initId withName:(NSString *)initName 
+				withPath:(NSString *)initPath withExtensions:(NSArray *)initExtensions
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - initWithIdentifier:%@ withName:%@ withPath:%@",
 						  initId,initName,initPath);
@@ -29,6 +29,7 @@
 	helper = [BackRowHelper sharedInstance];
 	identifier = initId;
 	[identifier retain];
+	altIdentifier = nil;
 	name = initName;
 	[name retain];
 	path = initPath;
@@ -45,17 +46,12 @@
 	_items = [[NSMutableArray alloc] initWithObjects:nil];
 	_fileListArray = [[NSMutableArray alloc] initWithObjects:nil];
 
-	[self listMoreFiles];
-
-	// id list = [self list];
-	// [list setDatasource: self];
-
 	return self;
 }
 
 - (void)listMoreFiles
 {
-	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - listFiles");
+	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - listMoreFiles");
 	
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	NSMutableArray *dirContents = [NSMutableArray arrayWithArray:[fileManager directoryContentsAtPath:path]];
@@ -79,9 +75,7 @@
 	
 	if (totalCount <= prevCount) return;
 	
-	id list = [self list];
-	id selObject = [self selectedObject]; 
-	[list setDatasource: nil];
+	[[self list] setDatasource: nil];
 
 	// Remove the "More..." item
 	if ((prevCount > 0) && ([[_fileListArray lastObject] isEqualToString:@"###More###"]))
@@ -92,6 +86,7 @@
 
 	currCount = totalCount;
 	
+	/*
 	if (totalCount <= (prevCount + 100))
 	{
 		currCount = totalCount - prevCount;
@@ -101,6 +96,7 @@
 		currCount = prevCount + 100;
 		addMoreItem = true;
 	}
+	*/
 
 	if (DEBUG_MODE) NSLog(@"listFiles - totalCount=%i, prevCount=%i, currCount=%i",totalCount,prevCount,currCount);
 	
@@ -118,6 +114,7 @@
 			id item = [BRTextMenuItemLayer folderMenuItem];
 			[item setTitle:idStr];
 			[_items addObject:item];
+			NSLog(@"blarg1");
 		}
 		else
 		{
@@ -138,6 +135,7 @@
 			else	// otherwise, set the menu entry to the whole filename
 			{
 				fileName = [idStr copy];
+				NSLog(@"blarg2");
 			}
 			
 			// create a new menu item and set the filename
@@ -147,6 +145,7 @@
 				id item = [BRTextMenuItemLayer menuItem];
 				[item setTitle:fileName];
 				[_items addObject:item];
+				NSLog(@"blarg3");
 			}
 		}
 	}
@@ -159,9 +158,11 @@
 		[_items addObject:item];
 	}
 	
-	[list setDatasource: self];
-	[self setSelectedObject:selObject];
+	NSLog(@"blarg4");
+	[[self list] setDatasource: self];
+	[self refreshControllerForModelUpdate];
 	prevCount = currCount;
+    NSLog(@"blarg5");
 }
 
 - (void)dealloc
@@ -173,23 +174,61 @@
 	[name release];
 	[path release];
 	[selectedFileExtensions release];
+	if (altIdentifier != nil) [altIdentifier release];
 	if (startupScript != nil) [startupScript release];
 	if (upScript != nil) [upScript release];
 	if (downScript != nil) [downScript release];
 	if (leftScript != nil) [leftScript release];
 	if (rightScript != nil) [rightScript release];
+	
+	[self clearFileList];
+	[_items release];
+	[_fileListArray release];
+	
 	[super dealloc];
 	[helper showFrontRow];
 }
 
-/*
+- (void)clearFileList
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - clearFileList");
+	
+	[[self list] setDatasource: nil];
+	[self refreshControllerForModelUpdate];
+	
+	id obj;
+	while((obj = [[_items objectEnumerator] nextObject]) != nil)
+		[_items removeObject:obj];
+	while((obj = [[_fileListArray objectEnumerator] nextObject]) != nil)
+		[_fileListArray removeObject:obj];
+	prevCount = 0;
+}
+
+- (void)controlWasActivated
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - controlWasActivated");
+	
+	[self listMoreFiles];
+	
+	[super controlWasActivated];
+}
+
 - (void)controlWasDeactivated
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - controlWasDeactivated");
+	
+	[self clearFileList];
+	
 	[super controlWasDeactivated];
-	[[self stack] removeController:self];
 }
-*/
+
+
+- (void)setAltIdentifier:(NSString *)altId
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - setAltIdentifier");
+	altIdentifier = altId;
+	[altIdentifier retain];
+}
 
 - (void)setStartupScript:(NSString *)aScript
 {
@@ -234,6 +273,7 @@
 - (id)previewControlForItem:(long)fp8
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - previewControlForItem, row=%i",fp8);
+	if ([_fileListArray count]==0) return nil;
 
 	NSArray *extensionsArray = [NSArray arrayWithObjects:@".png", @".jpg", nil];
 	NSEnumerator *enumerator = [extensionsArray objectEnumerator];
@@ -280,7 +320,8 @@
 			EmulatorsApplianceMenuController *menu = 
 				[[EmulatorsApplianceMenuController alloc] 
 					initWithIdentifier:identifier withName:name withPath:pathToROM withExtensions:selectedFileExtensions];
-			 
+			
+			if (altIdentifier != nil) [menu setAltIdentifier:altIdentifier];
 			if (startupScript != nil) [menu setStartupScript:startupScript];
 			if (upScript != nil) [menu setUpScript:upScript];
 			if (downScript != nil) [menu setDownScript:downScript];
@@ -302,6 +343,7 @@
 		if (! emulatorRunning)
 		{
 			[helper showFrontRow];
+			[self listMoreFiles];
 			BRAlertController *alert = [BRAlertController alertOfType:0
 				titled:@"Error"
 				primaryText:[NSString stringWithFormat:@"%@ could not be opened",identifier]
@@ -315,6 +357,7 @@
 		[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"SavePathToROM" ofType:@"sh"] 
 								 arguments:[NSArray arrayWithObjects:path, nil]];
 		
+		[self clearFileList];
 		[helper hideFrontRowSetResponderTo:self];
 		
 		if (startupScript != nil) [self runAppleScript:startupScript];
@@ -329,34 +372,39 @@
 
 - (int)getEmulatorPID
 {
-	int thePID=0;
-	NSString *ident;
-	
-	// Bad hack because 'zsnes.app' launches 'ZSNES' process
-	if ([identifier isEqualToString:@"zsnes"])
+	int thePID = 0;
+	BOOL checkAltId;
+	if (altIdentifier != nil)
 	{
-		ident = @"ZSNES";
+		checkAltId = TRUE;
 	}
 	else
 	{
-		ident = identifier;
+		checkAltId = FALSE;
 	}
 
 	NSArray *apps = [workspace valueForKeyPath:@"launchedApplications.NSApplicationName"];
 	NSArray *pids = [workspace valueForKeyPath:@"launchedApplications.NSApplicationProcessIdentifier"];
-	// if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@",apps]);
-	// if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@",pids]);
+	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@",apps]);
+	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@",pids]);
 	
 	int i;
 	for (i=0; i<[apps count]; i++)
 	{
-		if ([ident isEqualToString:[apps objectAtIndex:i]])
+		if ([identifier isEqualToString:[apps objectAtIndex:i]])
 		{
 			thePID = [[pids objectAtIndex:i] intValue];
 		}
+		else if (checkAltId)
+		{
+			if ([altIdentifier isEqualToString:[apps objectAtIndex:i]])
+			{
+				thePID = [[pids objectAtIndex:i] intValue];
+			}
+		}
 	}
 	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"EmulatorsApplianceMenuController - getEmulatorPID: %@ returned %i",
-						   ident,thePID]);
+						   identifier,thePID]);
 	return thePID;
 }
 
@@ -370,6 +418,15 @@
 		NSLog(@"killEmulatorAndShowFrontRow : killing pid %i",emuPID);
 		[NSTask launchedTaskWithLaunchPath:@"/bin/kill"
 								 arguments:[NSArray arrayWithObjects:[NSString stringWithFormat:@"%i",emuPID],nil]];
+		
+		// kill twice for good measure
+		emuPID = [self getEmulatorPID];
+		if (emuPID != 0)
+		{
+			NSLog(@"killEmulatorAndShowFrontRow : killing pid %i",emuPID);
+			[NSTask launchedTaskWithLaunchPath:@"/bin/kill"
+									 arguments:[NSArray arrayWithObjects:[NSString stringWithFormat:@"%i",emuPID],nil]];
+		}
 
 		if (DEBUG_MODE) NSLog(@"killEmulatorAndShowFrontRow - ForgetPathToROM");
 		NSBundle *bundle = [NSBundle bundleForClass:[self class]];
@@ -379,6 +436,7 @@
 	emulatorRunning = NO;
 	
 	[helper showFrontRow];
+	[self listMoreFiles];
 	tappedOnce = NO;
 }
 
@@ -396,6 +454,7 @@
 			emulatorRunning = NO;
 			tappedOnce = NO;
 			[helper showFrontRow];
+			[self listMoreFiles];
 			[[self stack] popController];
 			return YES;
 		}
@@ -490,6 +549,8 @@
 			NSLog(@"runAppleScript returned: %@",[subDescriptor stringValue]);
 		}
 	}
+	[theScript release];
+	[error release];
 }
 
 // Data source methods:
