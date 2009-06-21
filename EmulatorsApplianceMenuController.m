@@ -330,9 +330,7 @@
 			pathToROM = [pathToROM stringByAppendingString:@"/"];
 			
 			EmulatorsApplianceMenuController *menu;
-			
 			menu = [childControllers objectForKey:pathToROM];
-			
 			if (menu != nil)
 			{
 				if (DEBUG_MODE) NSLog(@"itemSelected - Found previous controller with pathToROM=%@",pathToROM);

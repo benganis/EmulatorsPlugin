@@ -1,0 +1,2 @@
+= License =
+This plugin and its source code are free to all.  You may modify it to your liking, but I would still like to maintain any "official" releases.  This software comes with no implied warranty, and I am not responsible for any damages.

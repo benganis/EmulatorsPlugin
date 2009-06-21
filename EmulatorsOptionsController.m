@@ -92,12 +92,14 @@
 
 	NSString *bundlePath = @"/System/Library/CoreServices/Finder.app/Contents/PlugIns/Emulators.frappliance";
 	bundle = [NSBundle bundleWithPath:bundlePath];
-	NSString *vString;
-	//vString = [@"Version: " stringByAppendingString:[bundle bundleVersion];
-	vString = [@"Version: " stringByAppendingString:@"2.0"];
+	NSString *vString, *moreString;
+	vString = [@"Version: " stringByAppendingString:[bundle objectForInfoDictionaryKey:@"CFBundleVersion"]];
+	if (DEBUG_MODE) { moreString = @"DEBUG mode is ON\n\n"; }
+	else { moreString = @""; }
+	moreString = [moreString stringByAppendingString:@"by bgan1982@mac.com (Ben)\n\n"];
+	moreString = [moreString stringByAppendingString:@"http://code.google.com/p/emulatorsplugin\nhttp://wiki.awkwardtv.org/wiki/EmulatorsPlugIn"];
 
-	BRAlertController *alert = [BRAlertController alertOfType:0 titled:@"About Emulators PlugIn..." primaryText:vString
-		secondaryText:@"by bgan1982@mac.com (Ben)\n\nhttp://code.google.com/p/emulatorsplugin\nhttp://wiki.awkwardtv.org/wiki/EmulatorsPlugIn"];
+	BRAlertController *alert = [BRAlertController alertOfType:0 titled:@"About Emulators PlugIn..." primaryText:vString secondaryText:moreString];
 	[[self stack] pushController:alert];
 }
 
