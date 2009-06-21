@@ -69,23 +69,23 @@ reset at any time by selecting:
 
 Here are descriptions for keys in the plist:
 
-identifier      : The executable name of an emulator.
-name            : The emulator name that will appear in the menu.
-path            : The path to ROMs folder for the current emulator. If
+identifier      : The executable name of an emulator.
+name            : The emulator name that will appear in the menu.
+path            : The path to ROMs folder for the current emulator. If
                   this tag is missing or empty, it will run the executable  
                   without bringing up a ROM list.
-preferred-order : A real number which gives the order of the categories.
+preferred-order : A real number which gives the order of the categories.
                   Make sure these are unique.
 
-alt-identifier      (optional) : Executable name of a child process.
+alt-identifier      (optional) : Executable name of a child process.
    For example, ZSNES.app launches the 'zsnes' process.
 
-startup-script      (optional) : An AppleScript that will run when the executable is launched.
-up-button-script    (optional) : An AppleScript that will run when the up key is pressed.
-down-button-script  (optional) : An AppleScript that will run when the down key is pressed.
-left-button-script  (optional) : An AppleScript that will run when the left key is pressed.
-right-button-script (optional) : An AppleScript that will run when the right key is pressed.
-file-extensions     (optional) : A comma separated list of which file extensions to display.
+startup-script      (optional) : An AppleScript that will run when the executable is launched.
+up-button-script    (optional) : An AppleScript that will run when the up key is pressed.
+down-button-script  (optional) : An AppleScript that will run when the down key is pressed.
+left-button-script  (optional) : An AppleScript that will run when the left key is pressed.
+right-button-script (optional) : An AppleScript that will run when the right key is pressed.
+file-extensions     (optional) : A comma separated list of which file extensions to display.
    All files which do not end in these extensions will be filtered out of the ROM list.
 
 AppleScripts require that the following components be installed, which
