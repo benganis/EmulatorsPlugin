@@ -3,7 +3,6 @@
 //  System
 //
 //  Created by ash on 04.03.09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

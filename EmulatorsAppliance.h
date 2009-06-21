@@ -1,6 +1,6 @@
 //
 //  EmulatorsAppliance.h
-//  EmulatorsPlugIn 1.5
+//  EmulatorsPlugIn 2.0
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
