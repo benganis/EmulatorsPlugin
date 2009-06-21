@@ -21,13 +21,13 @@
 		<key>name</key>
 		<string>Emulators</string>
 		<key>desc</key>
-		<string>http://emulatorsplugin.googlecode.com/files/README.txt</string>
+		<string>http://emulatorsplugin.googlecode.com/svn/trunk/README.txt</string>
 		<key>URL</key>
 		<string>http://emulatorsplugin.googlecode.com/files/Emulators_PlugIn_2.0.zip</string>
 		<key>ImageURL</key>
 		<string>http://emulatorsplugin.googlecode.com/svn/trunk/Emulators.png</string>
 		<key>license</key>
-		<string>http://emulatorsplugin.googlecode.com/files/LICENSE.txt</string>
+		<string>http://emulatorsplugin.googlecode.com/svn/trunk/LICENSE.txt</string>
 	</dict>
 </dict>
 </plist>
