@@ -44,7 +44,7 @@ Step 3.  Install the EmulatorsPlugIn into the PlugIns folder:
 
 Step 4.  Restart FrontRow:
 
-     ps ax | awk '/Finder/ && !/awk/ {print $1}'
+     kill `ps ax | awk '/Finder/ && !/awk/ {print $1}'`
 
 Step 5.  Set your Emulators to have desired settings such as Full Screen,
 Controller Map, etc.  You can use my default settings by selecting:
