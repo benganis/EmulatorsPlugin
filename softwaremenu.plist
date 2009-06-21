@@ -7,15 +7,15 @@
 		<key>ShortDescription</key>
 		<string>Appliance used to navigate ROMs and play emulators</string>
 		<key>ReleaseDate</key>
-		<date>2009-04-15T20:50:28Z</date>
+		<date>2009-06-20T20:50:28Z</date>
 		<key>Developer</key>
 		<string>bgan1982@mac.com</string>
 		<key>Version</key>
-		<string>1.4.1</string>
+		<string>2.0</string>
 		<key>displayVersion</key>
-		<string>1.4.1</string>
+		<string>2.0</string>
 		<key>md5</key>
-		<string>9e2b892f8b7a6fb5c04d217833f38d71cedf9021</string>
+		<string>66b15c464cf147e24873f6689079e625</string>
 		<key>DisplayName</key>
 		<string>EmulatorsPlugin</string>
 		<key>name</key>
@@ -23,7 +23,7 @@
 		<key>desc</key>
 		<string>http://emulatorsplugin.googlecode.com/files/README.txt</string>
 		<key>URL</key>
-		<string>http://emulatorsplugin.googlecode.com/files/Emulators_PlugIn_1.4.1.zip</string>
+		<string>http://emulatorsplugin.googlecode.com/files/Emulators_PlugIn_2.0.zip</string>
 		<key>ImageURL</key>
 		<string>http://emulatorsplugin.googlecode.com/svn/trunk/Emulators.png</string>
 		<key>license</key>
