@@ -1,6 +1,6 @@
 //
 //  EmulatorsAlertController.h
-//  EmulatorsPlugIn 1.5
+//  EmulatorsPlugIn 2.0
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
@@ -71,18 +71,34 @@
 	switch (fp8)
 	{
 		case 0:
-			[self resetEmulatorPreferences];
+			[self aboutEmulatorsPlugIn];
 			break;
 		case 1:
-			[self resetPlugInPreferences];
+			[self resetEmulatorPreferences];
 			break;
 		case 2:
-			[self enableQuartzExtreme];
+			[self resetPlugInPreferences];
 			break;
 		case 3:
 			[self killFinder];
 			break;
 	}
+}
+
+
+- (void)aboutEmulatorsPlugIn
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - aboutEmulatorsPlugIn");
+
+	NSString *bundlePath = @"/System/Library/CoreServices/Finder.app/Contents/PlugIns/Emulators.frappliance";
+	bundle = [NSBundle bundleWithPath:bundlePath];
+	NSString *vString;
+	//vString = [@"Version: " stringByAppendingString:[bundle bundleVersion];
+	vString = [@"Version: " stringByAppendingString:@"2.0"];
+
+	BRAlertController *alert = [BRAlertController alertOfType:0 titled:@"About Emulators PlugIn..." primaryText:vString
+		secondaryText:@"by bgan1982@mac.com (Ben)\n\nhttp://code.google.com/p/emulatorsplugin\nhttp://wiki.awkwardtv.org/wiki/EmulatorsPlugIn"];
+	[[self stack] pushController:alert];
 }
 
 - (void)resetEmulatorPreferences
@@ -142,18 +158,6 @@
 	[NSThread sleepUntilDate:future];
 	
 	[self killFinder];
-}
-
-- (void)enableQuartzExtreme
-{
-	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - enableQuartzExtreme");
-	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"EnableQuartz" ofType:@"sh"] 
-							 arguments:[NSArray arrayWithObjects:nil]];
-	/*
-	BRAlertController *alert = [BRAlertController alertOfType:0 titled:@""
-			primaryText:@"Quartz Extreme has been enabled." secondaryText:@""];
-	[[self stack] pushController:alert];
-	*/
 }
 
 - (void)killFinder

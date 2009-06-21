@@ -5,6 +5,3 @@ defaults write /Library/Preferences/com.apple.windowserver GLCompositor -dict ti
 
 # Enable Quartz 2D Extreme
 defaults write /Library/Preferences/com.apple.windowserver Quartz2DExtremeEnabled 1
-
-# Kill loginwindow
-kill `ps ax | grep loginwindow | grep -v grep | sed -e 's/[[:blank:]]*//' | sed -e 's/[[:blank:]].*//'`

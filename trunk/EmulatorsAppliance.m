@@ -1,6 +1,6 @@
 //
 //  EmulatorsAppliance.m
-//  EmulatorsPlugIn 1.5
+//  EmulatorsPlugIn 2.0
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
@@ -44,13 +44,18 @@
 	}
 	
 	// Rebuild Launch Services for noobs
-	if (DEBUG_MODE) NSLog(@"Rebuilding Launch Services...",[bundle bundlePath]);
+	if (DEBUG_MODE) NSLog(@"Rebuilding Launch Services...");
 	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"RebuildLaunchServices" ofType:@"sh"]
 							 arguments:[NSArray arrayWithObjects:nil]];
 	
 	// Remove the headache of enabling UI scripting for novice users
-	if (DEBUG_MODE) NSLog(@"Enabling UI Scripting...",[bundle bundlePath]);
+	if (DEBUG_MODE) NSLog(@"Enabling UI Scripting...");
 	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"EnableUIScripting" ofType:@"sh"]
+							 arguments:[NSArray arrayWithObjects:nil]];
+
+	// Remove the headache of enabling UI scripting for novice users
+	if (DEBUG_MODE) NSLog(@"Enabling Quartz and Quartz Extreme...");
+	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"EnableQuartz" ofType:@"sh"]
 							 arguments:[NSArray arrayWithObjects:nil]];
 	
 	return className;
