@@ -4,6 +4,10 @@
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
+//  $Author$
+//  $Date$
+//  $Rev$ 
+//  $HeadURL$
 
 #import "EmulatorsOptionsController.h"
 
