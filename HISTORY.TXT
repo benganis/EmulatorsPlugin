@@ -1,0 +1,48 @@
+= Version History =
+
+* 2.1   7/14/09
+** Added "type" plist-tag for launching scripts/tools
+** Fixed memory leak for allocation of menu controllers from appliance.
+
+* 2.0  	6/20/09
+** Sub-folders are now implemented
+** Huge increase in speed (fast memory deallocation)
+** Simplified applescripting with .pathToROM temp file
+** Fixed a bug causing slow display of large ROM folder
+** Added alt-identifier tag
+** Added About Emulators PlugIn... Option
+** Removed EnableQuartz Option
+
+* 1.4.1 	4/15/09
+** a new defaults.plist with screenshot, freeze, and defrost for bannister emulators
+** a few applescript bug fixes
+** the options menu enabled
+** the frappliance rebuilds launch services and enables ui scripting when loaded
+
+* 1.4 	2/19/09
+**Compiled against new BackRow 2.3 frameworks (Details here: [[BackRow_2.3]])
+**Once again fixed blink back to menu bug
+**Implemented artwork for PNG files in ROM directory
+**Additional AppleScript support for up,down,left,right buttons
+**Removed file extensions from ROM list; added file-extensions tag in plist
+**Automatic enabling of UI Scripting
+
+* 1.3 	2/10/09
+**Fixed problem with AppleTV 2.3, but this causes the blink back to menu bug to return :(
+**AppleScript support
+**Specifying a blank path will run an app without bringing up a ROM list
+
+* 1.2 	2/5/09
+**Play button restarts emulator, Menu button quits
+**FINALLY fixed blink back to menu bug
+**User configurable preferences in <code>~/Library/Preferences/com.bgan1982.EmulatorsPlugIn.plist</code>
+
+* 1.1 	12/3/08
+**Eliminated rungame.sh script
+**Used NSWorkSpace to access LaunchServices
+**Filtered out hidden files from ROM list
+**Switched zsnes with Snes9X
+**Pressing either menu or play will quit a running emulator
+
+* 1.0 	6/27/08
+** Initial Release
