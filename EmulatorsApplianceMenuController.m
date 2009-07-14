@@ -190,6 +190,8 @@
 	if (downScript != nil) [downScript release];
 	if (leftScript != nil) [leftScript release];
 	if (rightScript != nil) [rightScript release];
+	if (runScriptTask != nil) [runScriptTask release];
+	if (runScriptPipe != nil) [runScriptPipe release];
 	
 	[self clearFileList];
 	[_items release];
@@ -286,6 +288,7 @@
 - (void)setIsScript:(BOOL)aBOOL
 {
 	isScript = aBOOL;
+	runScriptPipe = [[NSPipe alloc] init];
 }
 
 - (long)defaultIndex
@@ -382,8 +385,15 @@
 			NSArray *pathComponents = [identifier pathComponents];
 			NSString *emu = [pathComponents lastObject];
 			
-			[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"RunScript" ofType:@"sh"]
-									 arguments:[NSArray arrayWithObjects:dir, emu, [pathToROM stringByDeletingPathExtension], nil]];
+			if (runScriptTask != nil) [runScriptTask release];
+			runScriptTask = [[NSTask alloc] init];
+			if (runScriptPipe != nil) [runScriptPipe release];
+			runScriptPipe = [[NSPipe alloc] init];
+			[runScriptTask setLaunchPath:[bundle pathForResource:@"RunScript" ofType:@"sh"]];
+			[runScriptTask setArguments:[NSArray arrayWithObjects:dir, emu, [pathToROM stringByDeletingPathExtension], nil]];
+			[runScriptTask setStandardOutput:runScriptPipe];
+			[runScriptTask setStandardError:runScriptPipe];
+			[runScriptTask launch];
 			emulatorRunning = TRUE;
 		}
 		else
@@ -423,39 +433,66 @@
 - (int)getEmulatorPID
 {
 	int thePID = 0;
-	BOOL checkAltId;
-	if (altIdentifier != nil)
+	
+	if (isScript)
 	{
-		checkAltId = YES;
+		if ([runScriptTask isRunning])
+		{
+			thePID = [runScriptTask processIdentifier];
+		}
+		else
+		{
+			emulatorRunning = NO;
+			[self printResultFromTask];
+		}
 	}
 	else
 	{
-		checkAltId = NO;
-	}
-
-	NSArray *apps = [workspace valueForKeyPath:@"launchedApplications.NSApplicationName"];
-	NSArray *pids = [workspace valueForKeyPath:@"launchedApplications.NSApplicationProcessIdentifier"];
-	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@",apps]);
-	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@",pids]);
-	
-	int i;
-	for (i=0; i<[apps count]; i++)
-	{
-		if ([identifier isEqualToString:[apps objectAtIndex:i]])
+		BOOL checkAltId;
+		if (altIdentifier != nil)
 		{
-			thePID = [[pids objectAtIndex:i] intValue];
+			checkAltId = YES;
 		}
-		else if (checkAltId)
+		else
 		{
-			if ([altIdentifier isEqualToString:[apps objectAtIndex:i]])
+			checkAltId = NO;
+		}
+
+		NSArray *apps = [workspace valueForKeyPath:@"launchedApplications.NSApplicationName"];
+		NSArray *pids = [workspace valueForKeyPath:@"launchedApplications.NSApplicationProcessIdentifier"];
+		if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@",apps]);
+		if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@",pids]);
+		
+		int i;
+		for (i=0; i<[apps count]; i++)
+		{
+			if ([identifier isEqualToString:[apps objectAtIndex:i]])
 			{
 				thePID = [[pids objectAtIndex:i] intValue];
+			}
+			else if (checkAltId)
+			{
+				if ([altIdentifier isEqualToString:[apps objectAtIndex:i]])
+				{
+					thePID = [[pids objectAtIndex:i] intValue];
+				}
 			}
 		}
 	}
 	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"EmulatorsApplianceMenuController - getEmulatorPID: %@ returned %i",
-						   identifier,thePID]);
+							   identifier,thePID]);
 	return thePID;
+}
+
+- (void)printResultFromTask
+{
+	NSData *output = [[runScriptPipe fileHandleForReading] readDataToEndOfFile];
+	NSString *string = [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
+	NSLog(@"Output from RunScript is:\n%@\n", string);
+	[string release];
+	[output release];
+	[runScriptPipe release];
+	[runScriptTask release];
 }
 
 - (void)killEmulatorAndShowFrontRow
@@ -482,6 +519,11 @@
 		NSBundle *bundle = [NSBundle bundleForClass:[self class]];
 		[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"ForgetPathToROM" ofType:@"sh"] 
 								 arguments:[NSArray arrayWithObjects:nil]];
+	}
+	if (isScript)
+	{
+		if ([runScriptTask isRunning]) [runScriptTask terminate];
+		[self printResultFromTask];
 	}
 	emulatorRunning = NO;
 	

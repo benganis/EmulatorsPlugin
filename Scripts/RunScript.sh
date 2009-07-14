@@ -20,19 +20,43 @@ function receive_signal {
 }
 trap receive_signal SIGHUP SIGINT SIGTERM
 
+function runcmd {
+   CMD="$1"
+   echo $CMD
+   $CMD
+   if [ $? -ne 0 ]; then
+      echo "Error - exiting RunScript.sh!"
+      exit 1;
+   fi
+}
+
+function runcmd_args {
+   CMD="$1"
+   ARGS="$2"
+   echo $CMD $ARGS
+   $CMD $ARGS
+   if [ $? -ne 0 ]; then
+      echo "Error - exiting RunScript.sh!"
+      exit 1;
+   fi
+}
+
 if [ -z $1 ] || [ -z $2 ]; then
   echo "Usage: rungame [Dir Name] [Script Name] [Arguments]"
   exit 1
-elif [ -d $dirname ]; then
-  echo "Error: $dirname not found"
-  exit 1
-elif [ -f $emuname ]; then
-  echo "Error: $emuname not found"
+elif ! [ -d $dirname ]; then
+  echo "Error: Directory $dirname not found"
   exit 1
 fi
 
-cd $dirname
-$emuname $arguments
+runcmd "cd $dirname"
+
+if ! [ -f $emuname ]; then
+  echo "Error: File $emuname not found"
+  exit 1
+fi
+
+runcmd_args "./$emuname" "$romname"
 
 ### Get PID of Emulator ###
 emupid=`ps auxww | grep "$emuname" | awk '!/grep/ && !/rungame/ {print $2}'`
