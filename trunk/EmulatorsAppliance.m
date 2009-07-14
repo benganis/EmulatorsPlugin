@@ -1,6 +1,6 @@
 //
 //  EmulatorsAppliance.m
-//  EmulatorsPlugIn 2.0
+//  EmulatorsPlugIn 2.1
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
@@ -93,6 +93,7 @@
 	NSString *leftScript;
 	NSString *rightScript;
 	NSArray *fileExtensions;
+	NSString *type;
 	
 	id obj;
 	while((obj = [enumerator nextObject]) != nil) 
@@ -108,6 +109,7 @@
 			leftScript = [obj valueForKey:@"left-button-script"];
 			rightScript = [obj valueForKey:@"right-button-script"];
 			fileExtensions = [[[obj valueForKey:@"file-extensions"] lowercaseString] componentsSeparatedByString:@","];
+			type = [[obj valueForKey:@"type"] lowercaseString];
 			
 			if (DEBUG_MODE) NSLog(@"Extension array=%@", [fileExtensions description]);
 		}
@@ -133,6 +135,7 @@
 			if (leftScript != nil) [alert setLeftScript: leftScript];
 			if (rightScript != nil) [alert setRightScript: rightScript];
 			if (startupScript != nil) [alert runAppleScript:startupScript];
+			if ([type isEqualToString:@"script"]) [alert setIsScript:YES];
 		}
 		
 		return alert;
@@ -155,18 +158,19 @@
 	}
 	
 	// Display a menu for path directory
-	EmulatorsApplianceMenuController *menu = 
-		[[EmulatorsApplianceMenuController alloc] initWithIdentifier:identifier withName:name 
+	if (menuController != nil) { [menuController release]; }
+	menuController = [[EmulatorsApplianceMenuController alloc] initWithIdentifier:identifier withName:name 
 															withPath:path withExtensions:fileExtensions];
 
-	if (altIdentifier != nil) [menu setAltIdentifier: altIdentifier];
-	if (startupScript != nil) [menu setStartupScript: startupScript];
-	if (upScript != nil) [menu setUpScript: upScript];
-	if (downScript != nil) [menu setDownScript: downScript];
-	if (leftScript != nil) [menu setLeftScript: leftScript];
-	if (rightScript != nil) [menu setRightScript: rightScript];
+	if (altIdentifier != nil) [menuController setAltIdentifier: altIdentifier];
+	if (startupScript != nil) [menuController setStartupScript: startupScript];
+	if (upScript != nil) [menuController setUpScript: upScript];
+	if (downScript != nil) [menuController setDownScript: downScript];
+	if (leftScript != nil) [menuController setLeftScript: leftScript];
+	if (rightScript != nil) [menuController setRightScript: rightScript];
+	if ([type isEqualToString:@"script"]) [menuController setIsScript:YES];
 	
-	return menu;
+	return menuController;
 }
 
 // Populate appliance categories from com.bgan1982.EmulatorsPlugIn.plist

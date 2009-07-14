@@ -1,6 +1,6 @@
 //
 //  EmulatorsAlertController.h
-//  EmulatorsPlugIn 2.0
+//  EmulatorsPlugIn 2.1
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
@@ -21,15 +21,26 @@
 	identifier = aIdentifier;
 	name = aName;
 	tappedOnce = NO;
+	isScript = NO;
 	helper = [BackRowHelper sharedInstance];
+	BOOL emulatorRunning;
 
 	NSLog(@"runEmulatorWithIdentifier - opening application %@",identifier);
-	BOOL emulatorRunning = [workspace launchApplication:identifier];
-	if (emulatorRunning) [helper hideFrontRowSetResponderTo:self];
 	
-	// NSImage *theIcon = [workspace iconForFile:[workspace fullPathForApplication:identifier]];
-	// CGImageRef *imgRef = ???
-	// [self->_image setImage:[BRImage imageWithCGImageRef:imgRef]];
+	if (isScript == YES)
+	{
+		NSLog(@"brEventAction: Opening executable %@",identifier);
+		[NSTask launchedTaskWithLaunchPath:identifier 
+								 arguments:[NSArray arrayWithObjects:nil]];
+		emulatorRunning = YES;
+	}
+	else
+	{
+		NSLog(@"brEventAction: Launch Services is Opening application %@",identifier);
+		emulatorRunning = [workspace launchApplication:identifier];
+	}
+	
+	if (emulatorRunning) [helper hideFrontRowSetResponderTo:self];
 	
 	return emulatorRunning;
 }
@@ -64,6 +75,10 @@
 	rightScript = aScript;
 }
 
+- (void)setIsScript:(BOOL)aBOOL
+{
+	isScript = aBOOL;
+}
 
 - (int)getEmulatorPID
 {

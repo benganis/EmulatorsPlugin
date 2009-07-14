@@ -77,16 +77,20 @@ path            : The path to ROMs folder for the current emulator. If
 preferred-order : A real number which gives the order of the categories.
                   Make sure these are unique.
 
+type                (optional) : "script" or "application" (default)
+
 alt-identifier      (optional) : Executable name of a child process.
    For example, ZSNES.app launches the 'zsnes' process.
+
+file-extensions     (optional) : A comma separated list of which file extensions to display.
+   All files which do not end in these extensions will be filtered out of the ROM list.
 
 startup-script      (optional) : An AppleScript that will run when the executable is launched.
 up-button-script    (optional) : An AppleScript that will run when the up key is pressed.
 down-button-script  (optional) : An AppleScript that will run when the down key is pressed.
 left-button-script  (optional) : An AppleScript that will run when the left key is pressed.
 right-button-script (optional) : An AppleScript that will run when the right key is pressed.
-file-extensions     (optional) : A comma separated list of which file extensions to display.
-   All files which do not end in these extensions will be filtered out of the ROM list.
+
 
 AppleScripts require that the following components be installed, which
 are available from the 1.0 recovery partition:

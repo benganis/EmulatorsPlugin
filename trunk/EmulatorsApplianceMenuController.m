@@ -1,6 +1,6 @@
 //
 //  EmulatorsApplianceMenuController.m
-//  EmulatorsPlugIn 2.0
+//  EmulatorsPlugIn 2.1
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
@@ -41,6 +41,7 @@
 
 	prevCount = 0;
 	lastSelectedRow = 0;
+	isScript = NO;
 	emulatorRunning = NO;
 	tappedOnce = NO;
 	menuLoaded = NO;
@@ -210,6 +211,8 @@
 - (void)clearFileList
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - clearFileList");
+
+	if (lastImageControl != nil) { [lastImageControl release]; lastImageControl = nil; }
 	
 	[[self list] setDatasource: nil];
 	menuLoaded = NO;
@@ -280,6 +283,11 @@
 	[rightScript retain];
 }
 
+- (void)setIsScript:(BOOL)aBOOL
+{
+	isScript = aBOOL;
+}
+
 - (long)defaultIndex
 {
 	return 0;
@@ -287,6 +295,7 @@
 
 - (id)previewControlForItem:(long)fp8
 {
+	if (lastImageControl != nil) { [lastImageControl release]; lastImageControl = nil; }
 	if (! menuLoaded) { return nil; }
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - previewControlForItem, row=%i",fp8);
 	
@@ -308,6 +317,7 @@
 			if (DEBUG_MODE) NSLog(@"previewControlForItem - ImagePath=%@",imagePath);
 			BRImageControl *imageControl = [[BRImageControl alloc] init];
 			[imageControl setImage:[BRImage imageWithPath:imagePath]];
+			lastImageControl = imageControl;
 			return imageControl;
 		}
 	}
@@ -317,6 +327,7 @@
 - (void)itemSelected:(long)fp8
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsApplianceMenuController - itemSelected, row=%i",fp8);
+	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
 	
 	if (! emulatorRunning)
 	{
@@ -362,8 +373,24 @@
 							   selectedFilename]);
 		
 		// Open the current ROM with the current Emulator using LaunchServices
-		NSLog(@"brEventAction: Opening %@ with application %@",pathToROM,identifier);
-		emulatorRunning = [workspace openFile:pathToROM withApplication:identifier];
+		NSLog(@"brEventAction: Launch Services is Opening %@ with application %@",pathToROM,identifier);
+		[self clearFileList];
+		if (isScript == YES)
+		{
+			NSLog(@"brEventAction: Opening %@ with executable %@",pathToROM,identifier);
+			NSString *dir = [identifier stringByDeletingLastPathComponent];
+			NSArray *pathComponents = [identifier pathComponents];
+			NSString *emu = [pathComponents lastObject];
+			
+			[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"RunScript" ofType:@"sh"]
+									 arguments:[NSArray arrayWithObjects:dir, emu, [pathToROM stringByDeletingPathExtension], nil]];
+			emulatorRunning = TRUE;
+		}
+		else
+		{
+			NSLog(@"brEventAction: Launch Services is Opening %@ with application %@",pathToROM,identifier);
+			emulatorRunning = [workspace openFile:pathToROM withApplication:identifier];
+		}
 		
 		if (! emulatorRunning)
 		{
@@ -378,11 +405,9 @@
 		}
 
 		if (DEBUG_MODE) NSLog(@"itemSelected - SavePathToROM");
-		NSBundle *bundle = [NSBundle bundleForClass:[self class]];
 		[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"SavePathToROM" ofType:@"sh"] 
 								 arguments:[NSArray arrayWithObjects:path, nil]];
 		
-		[self clearFileList];
 		[helper hideFrontRowSetResponderTo:self];
 		
 		if (startupScript != nil) [self runAppleScript:startupScript];

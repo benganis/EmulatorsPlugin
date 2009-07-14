@@ -1,6 +1,6 @@
 //
 //  EmulatorsApplianceMenuController.h
-//  EmulatorsPlugIn 2.0
+//  EmulatorsPlugIn 2.1
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
@@ -30,6 +30,7 @@
 	NSArray *selectedFileExtensions;
 
 	// State variables
+	BOOL isScript;
 	BOOL emulatorRunning;
 	BOOL tappedOnce;
 	BOOL menuLoaded;
@@ -38,6 +39,7 @@
 	NSString *selectedFilename;
 	long lastSelectedRow;
 	NSMutableDictionary *childControllers;
+	BRImageControl *lastImageControl;
 	
 	BackRowHelper *helper;
 	NSWorkspace *workspace;
@@ -57,6 +59,7 @@
 - (void)setDownScript:(NSString *)aScript;
 - (void)setLeftScript:(NSString *)aScript;
 - (void)setRightScript:(NSString *)aScript;
+- (void)setIsScript:(BOOL)aBOOL;
 
 - (int)getEmulatorPID;
 - (void)killEmulatorAndShowFrontRow;

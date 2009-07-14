@@ -1,6 +1,6 @@
 //
 //  EmulatorsAlertController.h
-//  EmulatorsPlugIn 2.0
+//  EmulatorsPlugIn 2.1
 //
 //  Created by bgan1982@mac.com (Ben) on 6/14/08.
 //
