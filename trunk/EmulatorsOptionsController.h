@@ -30,5 +30,6 @@
 - (void)resetEmulatorPreferences;
 - (void)resetPlugInPreferences;
 - (void)killFinder;
+- (void)restartAppleTV;
 
 @end

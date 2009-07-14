@@ -24,40 +24,5 @@
 	<string>EmulatorsAppliance</string>
 	<key>FRAppliancePreferedOrderValue</key>
 	<real>1.2</real>
-	<key>FRApplianceOptionsCategoryDescriptors</key>
-	<array>
-		<dict>
-			<key>identifier</key>
-			<string>About EmulatorsPlugIn...</string>
-			<key>name</key>
-			<string>About EmulatorsPlugIn...</string>
-			<key>preferred-order</key>
-			<integer>99</integer>
-		</dict>
-		<dict>
-			<key>identifier</key>
-			<string>Reset Emulators Preferences</string>
-			<key>name</key>
-			<string>Reset Emulators Preferences</string>
-			<key>preferred-order</key>
-			<integer>100</integer>
-		</dict>
-		<dict>
-			<key>identifier</key>
-			<string>Reset PlugIn Preferences</string>
-			<key>name</key>
-			<string>Reset PlugIn Preferences</string>
-			<key>preferred-order</key>
-			<integer>101</integer>
-		</dict>
-		<dict>
-			<key>identifier</key>
-			<string>Kill Finder</string>
-			<key>name</key>
-			<string>Kill Finder</string>
-			<key>preferred-order</key>
-			<integer>102</integer>
-		</dict>
-	</array>
 </dict>
 </plist>
