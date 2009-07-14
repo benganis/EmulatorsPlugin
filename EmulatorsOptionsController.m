@@ -29,15 +29,19 @@
 	NSString *bundlePath = @"/System/Library/CoreServices/Finder.app/Contents/PlugIns/Emulators.frappliance";
 	bundle = [NSBundle bundleWithPath:bundlePath];
 	
-	NSEnumerator *enumerator = [[bundle objectForInfoDictionaryKey:@"FRApplianceOptionsCategoryDescriptors"] 
-								objectEnumerator];
-	id obj;
-	while((obj = [enumerator nextObject]) != nil) 
+	int i;
+	for(i=0; i<5; i++)
 	{
-		// if (DEBUG_MODE) NSLog(@"Adding option %@",[obj valueForKey:@"identifier"]);
-		[_fileListArray addObject:[obj valueForKey:@"identifier"]];
+		NSString *str;
+		if (i==0) { str = @"About EmulatorsPlugIn..."; }
+		else if (i==1) { str = @"Reset Emulators Preferences"; }
+		else if (i==2) { str = @"Reset PlugIn Preferences"; }
+		else if (i==3) { str = @"Kill Finder"; }
+		else if (i==4) { str = @"Reboot AppleTV"; }
+		
+		[_fileListArray addObject:str];
 		id item = [[BRTextMenuItemLayer alloc] init];
-		[item setTitle:[obj valueForKey:@"name"]];
+		[item setTitle:str];
 		[_items addObject:item];
 	}
 	
@@ -85,6 +89,9 @@
 			break;
 		case 3:
 			[self killFinder];
+			break;
+		case 4:
+			[self restartAppleTV];
 			break;
 	}
 }
@@ -173,6 +180,15 @@
 	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"KillFinder" ofType:@"sh"]
 							 arguments:[NSArray arrayWithObjects:nil]];
 }
+
+- (void)restartAppleTV
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - restartAppleTV");
+	[[BackRowHelper sharedInstance] hideFrontRowSetResponderTo:self];
+	[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"RestartAppleTV" ofType:@"sh"]
+							 arguments:[NSArray arrayWithObjects:nil]];
+}
+
 
 // Data source methods:
 - (float)heightForRow:(long)row		{ return 0.0f; }

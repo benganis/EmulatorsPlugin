@@ -2,6 +2,8 @@
 
 * 2.1   7/14/09
 ** Added "type" plist-tag for launching scripts/tools
+*** Working with sdlmame!
+** Added Reboot Finder Option
 ** Fixed memory leak for allocation of menu controllers from appliance.
 
 * 2.0  	6/20/09
