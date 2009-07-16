@@ -532,13 +532,17 @@
 	tappedOnce = NO;
 }
 
-- (BOOL)brEventAction:(id)event
-{	
+
+
+- (BOOL)brEventAction:(BREvent *)event
+{
 	if (emulatorRunning)
 	{
-		unsigned int hashVal = (uint32_t)([event page] << 16 | [event usage]);
-		if ([(BRControllerStack *)[self stack] peekController] != self) hashVal = 0;
-		if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"brEventAction - hashVal = %i",hashVal]);
+		//unsigned int hashVal = (uint32_t)([event page] << 16 | [event usage]);
+		//if ([(BRControllerStack *)[self stack] peekController] != self) hashVal = 0;
+		//if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"brEventAction - hashVal = %i",hashVal]);
+		
+		if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"brEventAction - event = %i",[event remoteAction]]);
 		
 		// Check here to make sure emulator is really running
 		if ([self getEmulatorPID] == 0)
@@ -559,9 +563,9 @@
 		}
 		tappedOnce = YES;
 		
-		switch (hashVal)
+		switch([event remoteAction])
 		{
-			case 65676:		// tap up
+			case kBREventRemoteActionUp:		// tap up
 				if (DEBUG_MODE) NSLog(@"brEventAction: tap up");
 				if (upScript != nil)
 				{
@@ -569,7 +573,7 @@
 					return YES;
 				}
 				break;
-			case 65677:		// tap down
+			case kBREventRemoteActionDown:		// tap down
 				if (DEBUG_MODE) NSLog(@"brEventAction: tap down");
 				if (downScript != nil)
 				{
@@ -577,7 +581,7 @@
 					return YES;
 				}
 				break;
-			case 65675:		// tap left
+			case kBREventRemoteActionLeft:		// tap left
 				if (DEBUG_MODE) NSLog(@"brEventAction: tap left");
 				if (leftScript != nil)
 				{
@@ -585,7 +589,7 @@
 					return YES;
 				}
 				break;
-			case 65674:		// tap right
+			case kBREventRemoteActionRight:		// tap right
 				if (DEBUG_MODE) NSLog(@"brEventAction: tap right");		
 				if (rightScript != nil)
 				{
@@ -593,7 +597,7 @@
 					return YES;
 				}
 				break;
-			case 65670:		// tap menu
+			case kBREventRemoteActionMenu:		// tap menu
 				if (DEBUG_MODE) NSLog(@"brEventAction: tap menu -- quitting emulator");
 				
 				[self killEmulatorAndShowFrontRow];
@@ -603,7 +607,7 @@
 				return YES;
 				break;
 				
-			case 65673:		// tap play
+			case kBREventRemoteActionPlay:		// tap play
 				if (DEBUG_MODE) NSLog(@"brEventAction: tap play -- resetting emulator");			
 				
 				NSString *pathToROM = [path stringByAppendingPathComponent:selectedFilename];
