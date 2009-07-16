@@ -32,5 +32,32 @@
 - (BRImage *)getIconOfApplication:(NSString *)pathToApplication;
 - (BRImage *)getIconOfFile:(NSString *)pathToFile;
 
-
 @end
+
+// Gesture events have a dictionary defining the touch points and other info.
+typedef enum {
+	kBREventOriginatorRemote = 1,
+	kBREventOriginatorGesture = 3
+} BREventOriginator;
+
+// For AppleTV 2.4
+typedef enum {
+	// for originator kBREventOriginatorRemote
+	kBREventRemoteActionMenu = 1,
+	kBREventRemoteActionMenuHold,
+	kBREventRemoteActionUp,
+	kBREventRemoteActionDown,
+	kBREventRemoteActionPlay,
+	kBREventRemoteActionLeft,
+	kBREventRemoteActionRight,
+	
+	kBREventRemoteActionPlayHold = 20,
+	
+	// Gestures, for originator kBREventOriginatorGesture
+	kBREventRemoteActionTap = 30,
+	kBREventRemoteActionSwipeLeft,
+	kBREventRemoteActionSwipeRight,
+	kBREventRemoteActionSwipeUp,
+	kBREventRemoteActionSwipeDown
+	
+} BREventRemoteAction;
