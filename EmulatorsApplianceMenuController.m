@@ -190,8 +190,6 @@
 	if (downScript != nil) [downScript release];
 	if (leftScript != nil) [leftScript release];
 	if (rightScript != nil) [rightScript release];
-	if (runScriptTask != nil) [runScriptTask release];
-	if (runScriptPipe != nil) [runScriptPipe release];
 	
 	[self clearFileList];
 	[_items release];
@@ -288,7 +286,6 @@
 - (void)setIsScript:(BOOL)aBOOL
 {
 	isScript = aBOOL;
-	runScriptPipe = [[NSPipe alloc] init];
 }
 
 - (long)defaultIndex
@@ -378,27 +375,35 @@
 		// Open the current ROM with the current Emulator using LaunchServices
 		NSLog(@"brEventAction: Launch Services is Opening %@ with application %@",pathToROM,identifier);
 		[self clearFileList];
+		
 		if (isScript == YES)
 		{
-			NSLog(@"brEventAction: Opening %@ with executable %@",pathToROM,identifier);
+			NSLog(@"brEventAction: RunScrip.sh is opening %@ with executable %@",pathToROM,identifier);
 			NSString *dir = [identifier stringByDeletingLastPathComponent];
-			NSArray *pathComponents = [identifier pathComponents];
-			NSString *emu = [pathComponents lastObject];
+			NSString *emu = [[identifier pathComponents] lastObject];
+			NSString *game = [[[pathToROM pathComponents] lastObject] stringByDeletingPathExtension];
 			
-			if (runScriptTask != nil) [runScriptTask release];
-			runScriptTask = [[NSTask alloc] init];
-			if (runScriptPipe != nil) [runScriptPipe release];
-			runScriptPipe = [[NSPipe alloc] init];
+			NSTask *runScriptTask = [[NSTask alloc] init];
+			NSPipe *runScriptPipe = [[NSPipe alloc] init];
 			[runScriptTask setLaunchPath:[bundle pathForResource:@"RunScript" ofType:@"sh"]];
-			[runScriptTask setArguments:[NSArray arrayWithObjects:dir, emu, [pathToROM stringByDeletingPathExtension], nil]];
+			[runScriptTask setArguments:[NSArray arrayWithObjects: dir, emu, game, nil]];
 			[runScriptTask setStandardOutput:runScriptPipe];
 			[runScriptTask setStandardError:runScriptPipe];
 			[runScriptTask launch];
-			emulatorRunning = TRUE;
+			[runScriptTask waitUntilExit];
+			NSData *output = [[runScriptPipe fileHandleForReading] readDataToEndOfFile];
+			NSString *string = [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
+			NSLog(@"Output from RunScript is:\n%@\n", string);
+			int status = [runScriptTask terminationStatus];
+			if (status == 0) emulatorRunning = TRUE;
+			else emulatorRunning = FALSE;
+			[string release];
+			[runScriptPipe release];
+			[runScriptTask release];
 		}
 		else
 		{
-			NSLog(@"brEventAction: Launch Services is Opening %@ with application %@",pathToROM,identifier);
+			NSLog(@"brEventAction: Launch Services is opening %@ with application %@",pathToROM,identifier);
 			emulatorRunning = [workspace openFile:pathToROM withApplication:identifier];
 		}
 		
@@ -434,65 +439,39 @@
 {
 	int thePID = 0;
 	
-	if (isScript)
+	BOOL checkAltId;
+	if (altIdentifier != nil)
 	{
-		if ([runScriptTask isRunning])
-		{
-			thePID = [runScriptTask processIdentifier];
-		}
-		else
-		{
-			emulatorRunning = NO;
-			[self printResultFromTask];
-		}
+		checkAltId = YES;
 	}
 	else
 	{
-		BOOL checkAltId;
-		if (altIdentifier != nil)
-		{
-			checkAltId = YES;
-		}
-		else
-		{
-			checkAltId = NO;
-		}
+		checkAltId = NO;
+	}
 
-		NSArray *apps = [workspace valueForKeyPath:@"launchedApplications.NSApplicationName"];
-		NSArray *pids = [workspace valueForKeyPath:@"launchedApplications.NSApplicationProcessIdentifier"];
-		if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@",apps]);
-		if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@",pids]);
-		
-		int i;
-		for (i=0; i<[apps count]; i++)
+	NSArray *apps = [workspace valueForKeyPath:@"launchedApplications.NSApplicationName"];
+	NSArray *pids = [workspace valueForKeyPath:@"launchedApplications.NSApplicationProcessIdentifier"];
+	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@",apps]);
+	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@",pids]);
+	
+	int i;
+	for (i=0; i<[apps count]; i++)
+	{
+		if ([identifier isEqualToString:[apps objectAtIndex:i]])
 		{
-			if ([identifier isEqualToString:[apps objectAtIndex:i]])
+			thePID = [[pids objectAtIndex:i] intValue];
+		}
+		else if (checkAltId)
+		{
+			if ([altIdentifier isEqualToString:[apps objectAtIndex:i]])
 			{
 				thePID = [[pids objectAtIndex:i] intValue];
-			}
-			else if (checkAltId)
-			{
-				if ([altIdentifier isEqualToString:[apps objectAtIndex:i]])
-				{
-					thePID = [[pids objectAtIndex:i] intValue];
-				}
 			}
 		}
 	}
 	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"EmulatorsApplianceMenuController - getEmulatorPID: %@ returned %i",
 							   identifier,thePID]);
 	return thePID;
-}
-
-- (void)printResultFromTask
-{
-	NSData *output = [[runScriptPipe fileHandleForReading] readDataToEndOfFile];
-	NSString *string = [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
-	NSLog(@"Output from RunScript is:\n%@\n", string);
-	[string release];
-	[output release];
-	[runScriptPipe release];
-	[runScriptTask release];
 }
 
 - (void)killEmulatorAndShowFrontRow
@@ -519,11 +498,6 @@
 		NSBundle *bundle = [NSBundle bundleForClass:[self class]];
 		[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"ForgetPathToROM" ofType:@"sh"] 
 								 arguments:[NSArray arrayWithObjects:nil]];
-	}
-	if (isScript)
-	{
-		if ([runScriptTask isRunning]) [runScriptTask terminate];
-		[self printResultFromTask];
 	}
 	emulatorRunning = NO;
 	
