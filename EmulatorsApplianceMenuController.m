@@ -108,7 +108,7 @@
 	}
 	*/
 
-	if (DEBUG_MODE) NSLog(@"listFiles - totalCount=%i, prevCount=%i, currCount=%i",totalCount,prevCount,currCount);
+	if (DEBUG_MODE) NSLog(@"listMoreFiles - totalCount=%i, prevCount=%i, currCount=%i",totalCount,prevCount,currCount);
 	
 	for ( i = prevCount; i < currCount; i++ )
 	{
@@ -376,39 +376,45 @@
 		NSLog(@"brEventAction: Launch Services is Opening %@ with application %@",pathToROM,identifier);
 		[self clearFileList];
 		
+		// Push dummy alert before hiding FrontRow
+		BRAlertController *alert = [BRAlertController alertOfType:0 titled:@"" primaryText:@"" secondaryText:@""];
+		[[self stack] pushController:alert];
+		
+		[helper hideFrontRowSetResponderTo:self];
+		
 		if (isScript == YES)
 		{
-			NSLog(@"brEventAction: RunScrip.sh is opening %@ with executable %@",pathToROM,identifier);
+			NSLog(@"itemSelected: RunScript.sh is opening %@ with executable %@",pathToROM,identifier);
 			NSString *dir = [identifier stringByDeletingLastPathComponent];
 			NSString *emu = [[identifier pathComponents] lastObject];
 			NSString *game = [[[pathToROM pathComponents] lastObject] stringByDeletingPathExtension];
+			[self setAltIdentifier:emu];
 			
 			NSTask *runScriptTask = [[NSTask alloc] init];
-			NSPipe *runScriptPipe = [[NSPipe alloc] init];
+			
 			[runScriptTask setLaunchPath:[bundle pathForResource:@"RunScript" ofType:@"sh"]];
 			[runScriptTask setArguments:[NSArray arrayWithObjects: dir, emu, game, nil]];
-			[runScriptTask setStandardOutput:runScriptPipe];
-			[runScriptTask setStandardError:runScriptPipe];
 			[runScriptTask launch];
-			[runScriptTask waitUntilExit];
-			NSData *output = [[runScriptPipe fileHandleForReading] readDataToEndOfFile];
-			NSString *string = [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
-			NSLog(@"Output from RunScript is:\n%@\n", string);
-			int status = [runScriptTask terminationStatus];
-			if (status == 0) emulatorRunning = TRUE;
-			else emulatorRunning = FALSE;
-			[string release];
-			[runScriptPipe release];
+
+			// Wait for RunScript.sh to start emulator
+			// [runScriptTask waitUntilExit];
+			NSDate *future = [NSDate dateWithTimeIntervalSinceNow: 1.0];
+			[NSThread sleepUntilDate:future];
+
 			[runScriptTask release];
+			
+			if ([self getEmulatorPID] == 0) emulatorRunning = NO;
+			else emulatorRunning = YES;
 		}
 		else
 		{
-			NSLog(@"brEventAction: Launch Services is opening %@ with application %@",pathToROM,identifier);
+			NSLog(@"itemSelected: Launch Services is opening %@ with application %@",pathToROM,identifier);
 			emulatorRunning = [workspace openFile:pathToROM withApplication:identifier];
 		}
 		
 		if (! emulatorRunning)
 		{
+			NSLog(@"itemSelected: Could not launch emulator! - going back to FrontRow...");
 			[helper showFrontRow];
 			[self listMoreFiles];
 			BRAlertController *alert = [BRAlertController alertOfType:0
@@ -422,8 +428,6 @@
 		if (DEBUG_MODE) NSLog(@"itemSelected - SavePathToROM");
 		[NSTask launchedTaskWithLaunchPath:[bundle pathForResource:@"SavePathToROM" ofType:@"sh"] 
 								 arguments:[NSArray arrayWithObjects:path, nil]];
-		
-		[helper hideFrontRowSetResponderTo:self];
 		
 		if (startupScript != nil) [self runAppleScript:startupScript];
 		return;
@@ -501,8 +505,23 @@
 	}
 	emulatorRunning = NO;
 	
+	if (isScript)
+	{
+		NSDate *future = [NSDate dateWithTimeIntervalSinceNow: 1.0];
+		[NSThread sleepUntilDate:future];
+	}
+	
 	[helper showFrontRow];
+	
+	// Wait a little bit for emulator to quit
+	NSDate *future = [NSDate dateWithTimeIntervalSinceNow: 0.3];
+	[NSThread sleepUntilDate:future];
+
 	[self listMoreFiles];
+	
+	// Pop dummy alert
+	[[self stack] popController];
+
 	tappedOnce = NO;
 }
 
@@ -575,7 +594,6 @@
 				if (DEBUG_MODE) NSLog(@"brEventAction: tap menu -- quitting emulator");
 				
 				[self killEmulatorAndShowFrontRow];
-				//[[self stack] popController];
 				tappedOnce = NO;
 				
 				return YES;

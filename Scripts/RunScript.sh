@@ -22,12 +22,8 @@ function runcmd {
 function runcmd_args {
    CMD="$1"
    ARGS="$2"
-   echo $CMD $ARGS
-   $CMD $ARGS
-   if [ $? -ne 0 ]; then
-      echo "Error - exiting RunScript.sh!"
-      exit 1;
-   fi
+   echo $CMD $ARGS "&"
+   $CMD $ARGS &
 }
 
 echo "In RunScript.sh..."
