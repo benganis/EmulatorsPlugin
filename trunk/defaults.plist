@@ -276,6 +276,20 @@
 			  end tell
 			</string>
 		</dict>
+		<dict>
+			<key>identifier</key>
+			<string>/Applications/sdlmame0122-intel-nodebug/mame</string>
+			<key>name</key>
+			<string>Arcade</string>
+			<key>type</key>
+			<string>script</string>
+			<key>preferred-order</key>
+			<real>106</real>
+			<key>path</key>
+			<string>/Users/frontrow/ROMs/MAME/</string>
+			<key>file-extensions</key>
+			<string>zip</string>
+		</dict>
 	</array>
 </dict>
 </plist>
