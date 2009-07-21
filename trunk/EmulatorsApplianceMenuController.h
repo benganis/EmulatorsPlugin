@@ -37,8 +37,6 @@
 	long prevCount;
 	long startCount;
 	long lastSelectedRow;
-	NSTask *runScriptTask;
-	NSPipe *runScriptPipe;
 	NSString *selectedFilename;
 	NSMutableDictionary *childControllers;
 	BRImageControl *lastImageControl;
@@ -64,7 +62,6 @@
 - (void)setIsScript:(BOOL)aBOOL;
 
 - (int)getEmulatorPID;
-- (void)printResultFromTask;
 - (void)killEmulatorAndShowFrontRow;
 - (void)runAppleScript:(NSString *)aScript;
 
