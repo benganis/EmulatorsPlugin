@@ -10,6 +10,8 @@
 		3E18541A0F4781570070BEED /* EmulatorsOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1854190F4781570070BEED /* EmulatorsOptionsController.m */; };
 		3E5A56090FC8E44100DBBD9A /* BackRow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E5A56080FC8E44100DBBD9A /* BackRow.framework */; };
 		3E6095F3100C4E3C00C1493D /* RestartAppleTV.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3E6095F2100C4E3C00C1493D /* RestartAppleTV.sh */; };
+		3E62A3CB1017D0A4001316A1 /* EmulatorsDisableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E62A3CA1017D0A4001316A1 /* EmulatorsDisableController.m */; };
+		3E62A78B1017D392001316A1 /* EmulatorsForceQuitController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E62A78A1017D392001316A1 /* EmulatorsForceQuitController.m */; };
 		3E7C06630E25396600546305 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7C06620E25396600546305 /* QuartzCore.framework */; };
 		3E8F9187100C349000274DA3 /* RunScript.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3E8F9186100C349000274DA3 /* RunScript.sh */; };
 		3EB2F5690F3D5C2F003E095D /* EmulatorsAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB2F5680F3D5C2F003E095D /* EmulatorsAlertController.m */; };
@@ -42,6 +44,10 @@
 		3E1854190F4781570070BEED /* EmulatorsOptionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsOptionsController.m; sourceTree = "<group>"; };
 		3E5A56080FC8E44100DBBD9A /* BackRow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackRow.framework; path = ../BackRow.framework; sourceTree = SOURCE_ROOT; };
 		3E6095F2100C4E3C00C1493D /* RestartAppleTV.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = RestartAppleTV.sh; sourceTree = "<group>"; };
+		3E62A3C91017D0A4001316A1 /* EmulatorsDisableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsDisableController.h; sourceTree = "<group>"; };
+		3E62A3CA1017D0A4001316A1 /* EmulatorsDisableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsDisableController.m; sourceTree = "<group>"; };
+		3E62A7891017D392001316A1 /* EmulatorsForceQuitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsForceQuitController.h; sourceTree = "<group>"; };
+		3E62A78A1017D392001316A1 /* EmulatorsForceQuitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsForceQuitController.m; sourceTree = "<group>"; };
 		3E7C06620E25396600546305 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		3E8F9186100C349000274DA3 /* RunScript.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = RunScript.sh; sourceTree = "<group>"; };
 		3EB2F5670F3D5C2F003E095D /* EmulatorsAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsAlertController.h; sourceTree = "<group>"; };
@@ -129,6 +135,10 @@
 				3EB2F5680F3D5C2F003E095D /* EmulatorsAlertController.m */,
 				3E1854180F4781570070BEED /* EmulatorsOptionsController.h */,
 				3E1854190F4781570070BEED /* EmulatorsOptionsController.m */,
+				3E62A3C91017D0A4001316A1 /* EmulatorsDisableController.h */,
+				3E62A3CA1017D0A4001316A1 /* EmulatorsDisableController.m */,
+				3E62A7891017D392001316A1 /* EmulatorsForceQuitController.h */,
+				3E62A78A1017D392001316A1 /* EmulatorsForceQuitController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -263,6 +273,8 @@
 				3EB2F5690F3D5C2F003E095D /* EmulatorsAlertController.m in Sources */,
 				3E18541A0F4781570070BEED /* EmulatorsOptionsController.m in Sources */,
 				5EB6B1FD0F6A81E000EC5314 /* BackRowHelper.m in Sources */,
+				3E62A3CB1017D0A4001316A1 /* EmulatorsDisableController.m in Sources */,
+				3E62A78B1017D392001316A1 /* EmulatorsForceQuitController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

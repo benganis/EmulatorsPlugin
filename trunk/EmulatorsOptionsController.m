@@ -10,12 +10,14 @@
 //  $HeadURL$
 
 #import "EmulatorsOptionsController.h"
+#import "EmulatorsDisableController.h"
+#import "EmulatorsForceQuitController.h"
 
 @implementation EmulatorsOptionsController
 
 - (id)init;
 {
-	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - initWithApplicance");
+	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - init");
 	self = [super init];
 	if (self == nil) return nil;
 	
@@ -30,17 +32,31 @@
 	bundle = [NSBundle bundleWithPath:bundlePath];
 	
 	int i;
-	for(i=0; i<5; i++)
+	for(i=0; i<=4; i++)
 	{
 		NSString *str;
+		BOOL isDir = FALSE;
+
 		if (i==0) { str = @"About EmulatorsPlugIn..."; }
 		else if (i==1) { str = @"Reset Emulators Preferences"; }
 		else if (i==2) { str = @"Reset PlugIn Preferences"; }
 		else if (i==3) { str = @"Kill Finder"; }
 		else if (i==4) { str = @"Reboot AppleTV"; }
 		
+		/* Next version:
+		if (i==0) { str = @"About EmulatorsPlugIn..."; }
+		else if (i==1) { str = @"Reset Emulators Preferences"; }
+		else if (i==2) { str = @"Reset PlugIn Preferences"; }
+		else if (i==3) { str = @"Enable/Disable Emulators"; isDir = TRUE; }
+		else if (i==4) { str = @"Force Quit"; isDir = TRUE; }
+		else if (i==5) { str = @"Kill Finder"; }
+		else if (i==6) { str = @"Reboot AppleTV"; }
+		*/
+		 
 		[_fileListArray addObject:str];
-		id item = [[BRTextMenuItemLayer alloc] init];
+		id item;
+		if (isDir) item = [BRTextMenuItemLayer folderMenuItem];
+		else item = [BRTextMenuItemLayer menuItem];
 		[item setTitle:str];
 		[_items addObject:item];
 	}
@@ -64,6 +80,9 @@
 		[_fileListArray removeObject:obj];
 	[_items release];
 	[_fileListArray release];
+	
+	if (disableController != nil) { [disableController release]; }
+	if (forceQuitController != nil) { [forceQuitController release]; }
 	
 	[super dealloc];  
 }
@@ -91,8 +110,32 @@
 			[self killFinder];
 			break;
 		case 4:
-			[self restartAppleTV];
+			[self rebootAppleTV];
 			break;
+		
+		/* Next Version:
+		case 0:
+			[self aboutEmulatorsPlugIn];
+			break;
+		case 1:
+			[self resetEmulatorPreferences];
+			break;
+		case 2:
+			[self resetPlugInPreferences];
+			break;
+		case 3:
+			[self disableEmulatorsMenu];
+			break;
+		case 4:
+			[self forceQuitMenu];
+			break;
+		case 5:
+			[self killFinder];
+			break;
+		case 6:
+			[self rebootAppleTV];
+			break;
+		 */
 	}
 }
 
@@ -154,6 +197,14 @@
 
 }
 
+- (void)disableEmulatorsMenu
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - disableEmulatorsMenu");
+	
+	if (disableController != nil) { [[EmulatorsDisableController alloc] init]; }
+	[[self stack] pushController:disableController];
+}
+
 - (void)resetPlugInPreferences
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - resetPlugInPreferences");
@@ -173,6 +224,14 @@
 	[self killFinder];
 }
 
+- (void)forceQuitMenu
+{
+	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - forceQuitMenu");
+	
+	if (forceQuitController != nil) { [[EmulatorsForceQuitController alloc] init]; }
+	[[self stack] pushController:forceQuitController];
+}
+
 - (void)killFinder
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - killFinder");
@@ -181,7 +240,7 @@
 							 arguments:[NSArray arrayWithObjects:nil]];
 }
 
-- (void)restartAppleTV
+- (void)rebootAppleTV
 {
 	if (DEBUG_MODE) NSLog(@"EmulatorsOptionsController - restartAppleTV");
 	[[BackRowHelper sharedInstance] hideFrontRowSetResponderTo:self];

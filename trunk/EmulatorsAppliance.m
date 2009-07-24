@@ -72,10 +72,13 @@
 
 - (id)controllerForIdentifier:(id)identifier
 {
+	if (menuController != nil) { [menuController release]; }
+	if (optionsController != nil) { [optionsController release]; }
+	
 	if ([identifier isEqualToString:@"Options"])
 	{
-		EmulatorsOptionsController *optionsMenu = [[EmulatorsOptionsController alloc] init];
-		return optionsMenu;
+		optionsController = [[EmulatorsOptionsController alloc] init];
+		return optionsController;
 	}
 	
 	// Get path from com.bgan1982.EmulatorsPlugIn.plist
@@ -158,7 +161,6 @@
 	}
 	
 	// Display a menu for path directory
-	if (menuController != nil) { [menuController release]; }
 	menuController = [[EmulatorsApplianceMenuController alloc] initWithIdentifier:identifier withName:name 
 															withPath:path withExtensions:fileExtensions];
 
