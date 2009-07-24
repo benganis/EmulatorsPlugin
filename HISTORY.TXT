@@ -1,9 +1,10 @@
 = Version History =
 
-* 2.1   7/14/09
+* 2.1   7/24/09
 ** Added "type" plist-tag for launching scripts/tools
-*** Working with sdlmame!
-** Added Reboot Finder Option
+*** Working with sdlmame
+** Fixed blinking behavior upon returning to FrontRow
+** Added Reboot AppleTV Option
 ** Fixed memory leak for allocation of menu controllers from appliance.
 
 * 2.0  	6/20/09
