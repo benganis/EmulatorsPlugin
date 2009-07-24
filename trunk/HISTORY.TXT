@@ -1,6 +1,7 @@
 = Version History =
 
 * 2.1   7/24/09
+** Support for AppleTV 2.4
 ** Added "type" plist-tag for launching scripts/tools
 *** Working with sdlmame
 ** Fixed blinking behavior upon returning to FrontRow
