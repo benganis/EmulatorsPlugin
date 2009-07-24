@@ -4,7 +4,7 @@
 ** Support for AppleTV 2.4
 ** Added "type" plist-tag for launching scripts/tools
 *** Working with sdlmame
-** Fixed blinking behavior upon returning to FrontRow
+** Fixed flickering behavior upon returning to FrontRow
 ** Added Reboot AppleTV Option
 ** Fixed memory leak for allocation of menu controllers from appliance.
 
