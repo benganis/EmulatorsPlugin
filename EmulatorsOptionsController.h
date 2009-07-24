@@ -13,6 +13,8 @@
 #import <Cocoa/Cocoa.h>
 #import <BackRow/BackRow.h>
 #import <BackRowHelper.h>
+#import "EmulatorsDisableController.h"
+#import "EmulatorsForceQuitController.h"
 
 @interface EmulatorsOptionsController : BRMenuController
 {
@@ -24,12 +26,17 @@
 	// Data source variables:
 	NSMutableArray *_items;
 	NSMutableArray *_fileListArray;
+	
+	EmulatorsDisableController *disableController;
+	EmulatorsForceQuitController *forceQuitController;
 }
 
 - (void)aboutEmulatorsPlugIn;
 - (void)resetEmulatorPreferences;
+- (void)disableEmulatorsMenu;
 - (void)resetPlugInPreferences;
+- (void)forceQuitMenu;
 - (void)killFinder;
-- (void)restartAppleTV;
+- (void)rebootAppleTV;
 
 @end

@@ -13,10 +13,12 @@
 #import <Cocoa/Cocoa.h>
 #import <BackRow/BackRow.h>
 #import "EmulatorsApplianceMenuController.h"
+#import "EmulatorsOptionsController.h"
 
 @interface EmulatorsAppliance : BRBaseAppliance
 {
 	EmulatorsApplianceMenuController *menuController;
+	EmulatorsOptionsController *optionsController;
 }
 
 @end
