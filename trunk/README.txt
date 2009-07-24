@@ -26,12 +26,34 @@ in the following locations:
 
      /Users/frontrow/Library/Application Support/Emulator Enhancer/EmulatorEnhancer.bundle
 
+(Optional) For MAME support, install:
+
+     /Applications/sdlmame0122-intel-nodebug
+
+        Download from:  http://www.mametesters.net/sdlmame/binaries/sdlmame0122-intel-nodebug.tar.bz2
+
+        Note that this isn't the latest version of SDL-mame,
+        but a requirement to run on AppleTV is that it needs to be
+        compiled with Mac OS X 10.4 Tiger!
+
+     /Users/frontrow/Library/Frameworks/SDL.framework
+
+        Download from:  http://www.libsdl.org/release/SDL-1.2.13.dmg
+
+     Recommendations:
+
+        ln -s /Users/frontrow/ROMs/MAME /Applications/sdlmame0122-intel-nodebug/roms
+
+        In mame.ini, under video options change "soft" to "opengl".
+
+
 Step 2.  Copy the ROMs you wish to install into the following directory
 structure on your Apple TV:
 
      /Users/frontrow/ROMs/Coleco
      /Users/frontrow/ROMs/GBA
      /Users/frontrow/ROMs/Genesis
+     /Users/frontrow/ROMs/MAME
      /Users/frontrow/ROMs/N64
      /Users/frontrow/ROMs/NES
      /Users/frontrow/ROMs/SNES
@@ -77,7 +99,8 @@ path            : The path to ROMs folder for the current emulator. If
 preferred-order : A real number which gives the order of the categories.
                   Make sure these are unique.
 
-type                (optional) : "script" or "application" (default)
+type                (optional) : "application" (default), or "script"
+   For example, /Applications/sdlmame0122-intel-nodebug/mame runs as a "script".
 
 alt-identifier      (optional) : Executable name of a child process.
    For example, ZSNES.app launches the 'zsnes' process.
