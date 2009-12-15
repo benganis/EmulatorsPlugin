@@ -21,7 +21,7 @@
 {
     NSString *className = NSStringFromClass(self);
 	NSRange result = [[BRBacktracingException backtrace] rangeOfString:@"(in BackRow)"];
-	if (result.location != NSNotFound) className = @"RUIDVDAppliance";
+	if (result.location != NSNotFound) className = @"MOVAppliance";
 	
 	// Set defaults for com.bgan1982.EmulatorsPlugIn.plist
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -70,7 +70,7 @@
 	return ( @"Emulators" );
 }
 
-- (id)controllerForIdentifier:(id)identifier
+- (id)controllerForIdentifier:(id)identifier args:(id) identifier2
 {
 	if (menuController != nil) { [menuController release]; }
 	if (optionsController != nil) { [optionsController release]; }
