@@ -176,13 +176,13 @@
 }
 
 
-
+// This should show the icon EmulatorsPlugIn.png in the main menu ... doesn't to it right atm.
 - (NSArray *)previewProvidersForIdentifier:(id)arg1 withNames:(id *)arg2
 {
 	if (DEBUG_MODE) NSLog(@"previewProvidersForIdentifier");
 	
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"isLocal == YES"];
-    BRDataStore *store = [[BRDataStore alloc] initWithEntityName:@"a" predicate:pred mediaTypes:[NSSet setWithObject:[BRMediaType photo]]];
+    BRDataStore *store = [[BRDataStore alloc] initWithEntityName:@"store" predicate:pred mediaTypes:[NSSet setWithObject:[BRMediaType photo]]];
 	
         //NSLog(@"Adding Photos");
 //        id a = [SMImageReturns photoCollectionForPath:[SMGeneralMethods stringForKey:@"PhotoDirectory"]];
