@@ -175,6 +175,42 @@
 	return menuController;
 }
 
+
+
+- (NSArray *)previewProvidersForIdentifier:(id)arg1 withNames:(id *)arg2
+{
+	if (DEBUG_MODE) NSLog(@"previewProvidersForIdentifier");
+	
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"isLocal == YES"];
+    BRDataStore *store = [[BRDataStore alloc] initWithEntityName:@"a" predicate:pred mediaTypes:[NSSet setWithObject:[BRMediaType photo]]];
+	
+        //NSLog(@"Adding Photos");
+//        id a = [SMImageReturns photoCollectionForPath:[SMGeneralMethods stringForKey:@"PhotoDirectory"]];
+ //       [store addObject:a];
+	
+    SMMedia *meta = [[SMMedia alloc] init];
+    [meta setImagePath:[[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"]];
+	
+    BRPhotoImageProxy *iP = [BRPhotoImageProxy imageProxyWithAsset:meta];
+    BRImageProxyProvider *iPP = [BRImageProxyProvider providerWithAssets:[NSArray arrayWithObject:iP]];
+	
+    [store addObject:iPP];
+	
+    BRPhotoDataStoreProvider *provider = [BRPhotoDataStoreProvider providerWithDataStore:store controlFactory:[BRPhotoControlFactory mainMenuFactory]];
+	
+	if (DEBUG_MODE) NSLog(@"returning");
+    return [NSArray arrayWithObject:provider];
+}
+
+- (long)shelfColumnCount
+{
+    return 1;
+}
+
+
+
+
+
 // Populate appliance categories from com.bgan1982.EmulatorsPlugIn.plist
 - (id)applianceCategories
 {	
