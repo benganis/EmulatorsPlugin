@@ -36,6 +36,7 @@
 	if (DEBUG_MODE) NSLog(@"SystemAppliance: BackRowHelper - dealloc");
 
 	[workspace release];
+	
 	[pidOfRunningApp release];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -170,7 +171,7 @@
 }
 
 - (BOOL)quitApplicationWithPID: (NSString *)pid {
-	if (DEBUG_MODE) NSLog(@"SystemAppliance: quitApplicationWithPID - PID of app to kill %@", [NSString stringWithFormat:@"%@", pid]);
+	if (DEBUG_MODE) NSLog(@"quitApplicationWithPID - PID of app to kill %@", [NSString stringWithFormat:@"%@", pid]);
 	
 	if (pid != 0)
 	{
@@ -181,7 +182,7 @@
 }
 
 - (BOOL)quitApplication {
-	if (DEBUG_MODE) NSLog(@"SystemAppliance: quitApplication - PID of app to kill %@", [NSString stringWithFormat:@"%@", pidOfRunningApp]);
+	if (DEBUG_MODE) NSLog(@"quitApplication - PID of app to kill %@", [NSString stringWithFormat:@"%@", pidOfRunningApp]);
 	
 	if (pidOfRunningApp != 0)
 	{
@@ -200,12 +201,16 @@
 		float ATV_version = [[[BRSettingsFacade sharedInstance] versionSoftware] floatValue];
 		if (DEBUG_MODE) NSLog(@"ATV_version = %f",ATV_version);
 		
-		if (ATV_version > 2.29)
+		if (ATV_version > 2.99) {
+			if (DEBUG_MODE) NSLog(@"hideFrontRow - releaseAllDisplays");
+			[[BRDisplayManager sharedInstance] releaseAllDisplays];
+		}
+		else if (ATV_version > 2.29 && ATV_version < 3.0)
 		{
 			if (DEBUG_MODE) NSLog(@"hideFrontRow - _setNewDisplay:kCGNullDirectDisplay");
-			[[BRDisplayManagerCore sharedInstance] _setNewDisplay:kCGNullDirectDisplay];
+			//[[BRDisplayManagerCore sharedInstance] _setNewDisplay:kCGNullDirectDisplay];
 			if (DEBUG_MODE) NSLog(@"hideFrontRow - releaseAllDisplays");
-			[[BRDisplayManagerCore sharedInstance] releaseAllDisplays];
+			//[[BRDisplayManagerCore sharedInstance] releaseAllDisplays];
 		}
 		else
 		{
@@ -219,8 +224,8 @@
 			screenSaverWasEnabled = [[BRSettingsFacade sharedInstance] screenSaverEnabled];
 			
 			CGDisplayErr theErr = kCGErrorNoneAvailable;
-			int attempts=1;
-			while (theErr != kCGErrorSuccess && attempts<=5)
+			int attempts = 1;
+			while (theErr != kCGErrorSuccess && attempts <= 5)
 			{
 				if (DEBUG_MODE) NSLog(@"hideFrontRow : CGReleaseAllDisplays");
 				theErr = CGReleaseAllDisplays();
@@ -268,12 +273,16 @@
 		float ATV_version = [[[BRSettingsFacade sharedInstance] versionSoftware] floatValue];
 		if (DEBUG_MODE) NSLog(@"ATV_version = %f",ATV_version);
 		
-		if (ATV_version > 2.29)
+		if (ATV_version > 2.99) {
+			if (DEBUG_MODE) NSLog(@"showFrontRow - captureAllDisplays");
+			[[BRDisplayManager sharedInstance] captureAllDisplays];
+		}
+		else if (ATV_version > 2.29 && ATV_version < 3.0)
 		{
 			if (DEBUG_MODE) NSLog(@"showFrontRow - _setNewDisplay:kCGDirectMainDisplay");
-			[[BRDisplayManagerCore sharedInstance] _setNewDisplay:kCGDirectMainDisplay];
+			//[[BRDisplayManagerCore sharedInstance] _setNewDisplay:kCGDirectMainDisplay];
 			if (DEBUG_MODE) NSLog(@"showFrontRow - captureAllDisplays");
-			[[BRDisplayManagerCore sharedInstance] captureAllDisplays];
+			//[[BRDisplayManagerCore sharedInstance] captureAllDisplays];
 		}
 		else
 		{

@@ -11,7 +11,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import <BackRow/BackRow.h>
+#import <BackRow/BRRenderDisplayLink.h>
 #import <Foundation/Foundation.h>
+
 
 @interface BackRowHelper : NSObject {
 @private
@@ -19,6 +21,7 @@
 	NSWorkspace *workspace;
 	id oldFirstResponder;
 	NSString *pidOfRunningApp;
+	BRRenderDisplayLink *displayManager;
 }
 
 + (BackRowHelper *)sharedInstance;
