@@ -14,6 +14,7 @@
 #import <BackRow/BackRow.h>
 #import "EmulatorsApplianceMenuController.h"
 #import "EmulatorsOptionsController.h"
+#import "SMMedia.h"
 
 @interface EmulatorsAppliance : BRBaseAppliance
 {
