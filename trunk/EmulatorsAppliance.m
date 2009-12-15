@@ -188,7 +188,7 @@
 //        id a = [SMImageReturns photoCollectionForPath:[SMGeneralMethods stringForKey:@"PhotoDirectory"]];
  //       [store addObject:a];
 	
-	SMMedia *meta = [[SMMedia alloc] init];
+	EPMedia *meta = [[EPMedia alloc] init];
 	[meta setImagePath:[[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"]];
 	
 	BRPhotoImageProxy *iP = [BRPhotoImageProxy imageProxyWithAsset:meta];
@@ -197,17 +197,40 @@
 	[store addObject:iPP];
 	
 	BRPhotoDataStoreProvider *provider = [BRPhotoDataStoreProvider providerWithDataStore:store];
-	
-	if (DEBUG_MODE) NSLog(@"returning");
+
 	return [NSArray arrayWithObject:provider];
 }
-
+ */
 - (long)shelfColumnCount
 {
 	return 1;
 }
- */
 
+-(id)getImageForId:(NSString *)idstr
+{
+	if (DEBUG_MODE) NSLog(@"SMMedia coverArt");
+	id coverArt  = [BRImage imageWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"]];
+	
+	return coverArt;
+}
+
+-(id)previewControlForIdentifier:(id)arg1
+{
+	if (DEBUG_MODE) NSLog(@"previewControlForIdentifier");
+
+    BRMainMenuShelfControl *imageControl = [[BRMainMenuShelfControl alloc] init];
+	id provider = [[self previewProvidersForIdentifier:@"nill" withNames:nil] objectAtIndex:0];
+		
+	[imageControl setProvider:provider];
+	[imageControl setCentered:YES];
+	[imageControl setColumnCount:[self shelfColumnCount]];
+	//[imageControl setMinNumberOfShelfItems:3];
+	[imageControl setFeatured:YES];
+	[imageControl setScrollable:YES];
+	[imageControl setShowAllTitles:YES];
+	
+    return imageControl;
+}
 
 
 
