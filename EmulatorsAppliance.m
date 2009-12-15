@@ -196,7 +196,7 @@
 	
     [store addObject:iPP];
 	
-    BRPhotoDataStoreProvider *provider = [BRPhotoDataStoreProvider providerWithDataStore:store controlFactory:[BRPhotoControlFactory mainMenuFactory]];
+    BRPhotoDataStoreProvider *provider = [BRPhotoDataStoreProvider providerWithDataStore:store];
 	
 	if (DEBUG_MODE) NSLog(@"returning");
     return [NSArray arrayWithObject:provider];
