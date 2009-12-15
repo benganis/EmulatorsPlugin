@@ -455,8 +455,8 @@
 
 	NSArray *apps = [workspace valueForKeyPath:@"launchedApplications.NSApplicationName"];
 	NSArray *pids = [workspace valueForKeyPath:@"launchedApplications.NSApplicationProcessIdentifier"];
-	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@",apps]);
-	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@",pids]);
+	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"apps = %@", apps]);
+	if (DEBUG_MODE) NSLog([NSString stringWithFormat:@"pids = %@", pids]);
 	
 	int i;
 	for (i=0; i<[apps count]; i++)
