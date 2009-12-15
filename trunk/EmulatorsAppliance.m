@@ -177,36 +177,36 @@
 
 
 // This should show the icon EmulatorsPlugIn.png in the main menu ... doesn't to it right atm.
-- (NSArray *)previewProvidersForIdentifier:(id)arg1 withNames:(id *)arg2
+/* - (NSArray *)previewProvidersForIdentifier:(id)arg1 withNames:(id *)arg2
 {
 	if (DEBUG_MODE) NSLog(@"previewProvidersForIdentifier");
 	
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"isLocal == YES"];
-    BRDataStore *store = [[BRDataStore alloc] initWithEntityName:@"store" predicate:pred mediaTypes:[NSSet setWithObject:[BRMediaType photo]]];
+	NSPredicate *pred = [NSPredicate predicateWithFormat:@"isLocal == YES"];
+	BRDataStore *store = [[BRDataStore alloc] initWithEntityName:@"store" predicate:pred mediaTypes:[NSSet setWithObject:[BRMediaType photo]]];
 	
-        //NSLog(@"Adding Photos");
+		//NSLog(@"Adding Photos");
 //        id a = [SMImageReturns photoCollectionForPath:[SMGeneralMethods stringForKey:@"PhotoDirectory"]];
  //       [store addObject:a];
 	
-    SMMedia *meta = [[SMMedia alloc] init];
-    [meta setImagePath:[[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"]];
+	SMMedia *meta = [[SMMedia alloc] init];
+	[meta setImagePath:[[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"]];
 	
-    BRPhotoImageProxy *iP = [BRPhotoImageProxy imageProxyWithAsset:meta];
-    BRImageProxyProvider *iPP = [BRImageProxyProvider providerWithAssets:[NSArray arrayWithObject:iP]];
+	BRPhotoImageProxy *iP = [BRPhotoImageProxy imageProxyWithAsset:meta];
+	BRImageProxyProvider *iPP = [BRImageProxyProvider providerWithAssets:[NSArray arrayWithObject:iP]];
 	
-    [store addObject:iPP];
+	[store addObject:iPP];
 	
-    BRPhotoDataStoreProvider *provider = [BRPhotoDataStoreProvider providerWithDataStore:store];
+	BRPhotoDataStoreProvider *provider = [BRPhotoDataStoreProvider providerWithDataStore:store];
 	
 	if (DEBUG_MODE) NSLog(@"returning");
-    return [NSArray arrayWithObject:provider];
+	return [NSArray arrayWithObject:provider];
 }
 
 - (long)shelfColumnCount
 {
-    return 1;
+	return 1;
 }
-
+ */
 
 
 
