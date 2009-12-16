@@ -218,18 +218,14 @@
 {
 	if (DEBUG_MODE) NSLog(@"previewControlForIdentifier");
 
-    BRMainMenuShelfControl *imageControl = [[BRMainMenuShelfControl alloc] init];
-	id provider = [[self previewProvidersForIdentifier:@"nill" withNames:nil] objectAtIndex:0];
-		
-	[imageControl setProvider:provider];
-	[imageControl setCentered:YES];
-	[imageControl setColumnCount:[self shelfColumnCount]];
-	//[imageControl setMinNumberOfShelfItems:3];
-	[imageControl setFeatured:YES];
-	[imageControl setScrollable:YES];
-	[imageControl setShowAllTitles:YES];
+	NSString *appPng = [[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"];
 	
-    return imageControl;
+	BRImageAndSyncingPreviewController *obj = [[BRImageAndSyncingPreviewController alloc] init];
+	BRImage *sp = [BRImage imageWithPath:appPng];
+	[obj setImage:sp];
+	[obj setReflectionAmount:0.50f];
+	[obj setReflectionOffset:-0.55f];
+	return (obj);
 }
 
 
