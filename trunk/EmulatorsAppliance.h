@@ -14,7 +14,6 @@
 #import <BackRow/BackRow.h>
 #import "EmulatorsApplianceMenuController.h"
 #import "EmulatorsOptionsController.h"
-#import "EPMedia.h"
 
 @interface EmulatorsAppliance : BRBaseAppliance
 {
