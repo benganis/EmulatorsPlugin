@@ -218,14 +218,16 @@
 {
 	if (DEBUG_MODE) NSLog(@"previewControlForIdentifier");
 
-	NSString *appPng = [[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"];
+	NSString *pathToAppPng = [[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"];
+	BRImage *appIcon = [BRImage imageWithPath:pathToAppPng];
 	
-	BRImageAndSyncingPreviewController *obj = [[BRImageAndSyncingPreviewController alloc] init];
-	BRImage *sp = [BRImage imageWithPath:appPng];
-	[obj setImage:sp];
-	[obj setReflectionAmount:0.50f];
-	[obj setReflectionOffset:-0.55f];
-	return (obj);
+	BRImageAndSyncingPreviewController *iconControl = [[BRImageAndSyncingPreviewController alloc] init];
+	
+	
+	[iconControl setImage:appIcon];
+	//[iconControl setReflectionAmount:0.50f];
+	//[iconControl setReflectionOffset:-0.38f];
+	return (iconControl);
 }
 
 
