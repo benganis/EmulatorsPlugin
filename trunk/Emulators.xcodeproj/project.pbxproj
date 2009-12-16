@@ -28,10 +28,9 @@
 		3EDA34040FCB73C000556B9E /* SavePathToROM.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA34030FCB73C000556B9E /* SavePathToROM.sh */; };
 		3EDA34060FCB76C400556B9E /* ForgetPathToROM.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3EDA34050FCB76C400556B9E /* ForgetPathToROM.sh */; };
 		3EE6FE210E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6FE200E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m */; };
-		5E6D2FFD10D8E3F300E59B8D /* BRRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D2FFC10D8E3F300E59B8D /* BRRenderer.m */; };
+		5E6D2FFD10D8E3F300E59B8D /* EPRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E6D2FFC10D8E3F300E59B8D /* EPRenderer.m */; };
 		5E6D307210D8EDB000E59B8D /* EmulatorsPlugIn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E6D307110D8EDB000E59B8D /* EmulatorsPlugIn.png */; };
 		5E8E370F10D7B75200B9A015 /* BackRow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8E370E10D7B75200B9A015 /* BackRow.framework */; };
-		5E8E3B6A10D7E3B900B9A015 /* EPMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8E3B6910D7E3B900B9A015 /* EPMedia.m */; };
 		5EB6B1FD0F6A81E000EC5314 /* BackRowHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
@@ -69,12 +68,10 @@
 		3EDA34050FCB76C400556B9E /* ForgetPathToROM.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ForgetPathToROM.sh; sourceTree = "<group>"; };
 		3EE6FE1F0E11DBC000C50DF2 /* EmulatorsApplianceMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmulatorsApplianceMenuController.h; sourceTree = "<group>"; };
 		3EE6FE200E11DBC000C50DF2 /* EmulatorsApplianceMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmulatorsApplianceMenuController.m; sourceTree = "<group>"; };
-		5E6D2FFB10D8E3F300E59B8D /* BRRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRRenderer.h; sourceTree = "<group>"; };
-		5E6D2FFC10D8E3F300E59B8D /* BRRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRRenderer.m; sourceTree = "<group>"; };
+		5E6D2FFB10D8E3F300E59B8D /* EPRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPRenderer.h; sourceTree = "<group>"; };
+		5E6D2FFC10D8E3F300E59B8D /* EPRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPRenderer.m; sourceTree = "<group>"; };
 		5E6D307110D8EDB000E59B8D /* EmulatorsPlugIn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EmulatorsPlugIn.png; sourceTree = "<group>"; };
 		5E8E370E10D7B75200B9A015 /* BackRow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BackRow.framework; path = System/Library/PrivateFrameworks/BackRow.framework; sourceTree = SDKROOT; };
-		5E8E3B6810D7E3B900B9A015 /* EPMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPMedia.h; sourceTree = "<group>"; };
-		5E8E3B6910D7E3B900B9A015 /* EPMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPMedia.m; sourceTree = "<group>"; };
 		5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackRowHelper.m; sourceTree = "<group>"; };
 		5EB6B1FE0F6A81EA00EC5314 /* BackRowHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackRowHelper.h; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* Emulators.frappliance */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Emulators.frappliance; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,8 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				5E6D2FF910D8E3B200E59B8D /* BackRowHelper */,
-				5E8E3B6810D7E3B900B9A015 /* EPMedia.h */,
-				5E8E3B6910D7E3B900B9A015 /* EPMedia.m */,
 				918B27AF0D7CFB2100D87AC2 /* EmulatorsAppliance.h */,
 				918B27B00D7CFB2100D87AC2 /* EmulatorsAppliance.m */,
 				3EE6FE1F0E11DBC000C50DF2 /* EmulatorsApplianceMenuController.h */,
@@ -214,8 +209,8 @@
 			children = (
 				5EB6B1FE0F6A81EA00EC5314 /* BackRowHelper.h */,
 				5EB6B1FC0F6A81E000EC5314 /* BackRowHelper.m */,
-				5E6D2FFB10D8E3F300E59B8D /* BRRenderer.h */,
-				5E6D2FFC10D8E3F300E59B8D /* BRRenderer.m */,
+				5E6D2FFB10D8E3F300E59B8D /* EPRenderer.h */,
+				5E6D2FFC10D8E3F300E59B8D /* EPRenderer.m */,
 			);
 			name = BackRowHelper;
 			sourceTree = "<group>";
@@ -305,8 +300,7 @@
 				5EB6B1FD0F6A81E000EC5314 /* BackRowHelper.m in Sources */,
 				3E62A3CB1017D0A4001316A1 /* EmulatorsDisableController.m in Sources */,
 				3E62A78B1017D392001316A1 /* EmulatorsForceQuitController.m in Sources */,
-				5E8E3B6A10D7E3B900B9A015 /* EPMedia.m in Sources */,
-				5E6D2FFD10D8E3F300E59B8D /* BRRenderer.m in Sources */,
+				5E6D2FFD10D8E3F300E59B8D /* EPRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
