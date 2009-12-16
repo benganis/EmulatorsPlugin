@@ -176,44 +176,6 @@
 }
 
 
-// This should show the icon EmulatorsPlugIn.png in the main menu ... doesn't to it right atm.
-/* - (NSArray *)previewProvidersForIdentifier:(id)arg1 withNames:(id *)arg2
-{
-	if (DEBUG_MODE) NSLog(@"previewProvidersForIdentifier");
-	
-	NSPredicate *pred = [NSPredicate predicateWithFormat:@"isLocal == YES"];
-	BRDataStore *store = [[BRDataStore alloc] initWithEntityName:@"store" predicate:pred mediaTypes:[NSSet setWithObject:[BRMediaType photo]]];
-	
-		//NSLog(@"Adding Photos");
-//        id a = [SMImageReturns photoCollectionForPath:[SMGeneralMethods stringForKey:@"PhotoDirectory"]];
- //       [store addObject:a];
-	
-	EPMedia *meta = [[EPMedia alloc] init];
-	[meta setImagePath:[[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"]];
-	
-	BRPhotoImageProxy *iP = [BRPhotoImageProxy imageProxyWithAsset:meta];
-	BRImageProxyProvider *iPP = [BRImageProxyProvider providerWithAssets:[NSArray arrayWithObject:iP]];
-	
-	[store addObject:iPP];
-	
-	BRPhotoDataStoreProvider *provider = [BRPhotoDataStoreProvider providerWithDataStore:store];
-
-	return [NSArray arrayWithObject:provider];
-}
- */
-- (long)shelfColumnCount
-{
-	return 1;
-}
-
--(id)getImageForId:(NSString *)idstr
-{
-	if (DEBUG_MODE) NSLog(@"SMMedia coverArt");
-	id coverArt  = [BRImage imageWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"EmulatorsPlugIn" ofType:@"png"]];
-	
-	return coverArt;
-}
-
 -(id)previewControlForIdentifier:(id)arg1
 {
 	if (DEBUG_MODE) NSLog(@"previewControlForIdentifier");
@@ -223,9 +185,8 @@
 	
 	BRImageAndSyncingPreviewController *iconControl = [[BRImageAndSyncingPreviewController alloc] init];
 	
-	
 	[iconControl setImage:appIcon];
-	//[iconControl setReflectionAmount:0.50f];
+	[iconControl setReflectionAmount:0.00f];
 	//[iconControl setReflectionOffset:-0.38f];
 	return (iconControl);
 }
