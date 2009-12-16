@@ -11,8 +11,10 @@
 
 #import <Cocoa/Cocoa.h>
 #import <BackRow/BackRow.h>
-#import <BackRow/BRRenderDisplayLink.h>
+#import <BackRow/BRDisplayManager.h>
 #import <Foundation/Foundation.h>
+#import "EPRenderer.h"
+#import <OpenGL/OpenGL.h>
 
 
 @interface BackRowHelper : NSObject {
@@ -21,7 +23,9 @@
 	NSWorkspace *workspace;
 	id oldFirstResponder;
 	NSString *pidOfRunningApp;
-	BRRenderDisplayLink *displayManager;
+
+	BRDisplayManager *displayManager;
+	CARenderer* storedRenderer;
 }
 
 + (BackRowHelper *)sharedInstance;

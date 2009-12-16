@@ -27,6 +27,7 @@
 {
 	if (DEBUG_MODE) NSLog(@"SystemAppliance: BackRowHelper - init");
 	workspace = [NSWorkspace sharedWorkspace];
+	displayManager = [BRDisplayManager sharedInstance];
 	
 	return [super init];
 }
@@ -36,6 +37,7 @@
 	if (DEBUG_MODE) NSLog(@"SystemAppliance: BackRowHelper - dealloc");
 
 	[workspace release];
+	[displayManager release];
 	
 	[pidOfRunningApp release];
 	
@@ -203,7 +205,16 @@
 		
 		if (ATV_version > 2.99) {
 			if (DEBUG_MODE) NSLog(@"hideFrontRow - releaseAllDisplays");
-			[[BRDisplayManager sharedInstance] releaseAllDisplays];
+			[displayManager releaseAllDisplays];
+			
+			EPRenderer *theRender = [EPRenderer singleton];
+			//we need to replace the CARenderer in BRRenderer or Finder crashes in its RenderThread
+			//save it so it can be restored later
+			storedRenderer = [theRender renderer];
+			[theRender setRenderer:nil];
+			//this enables XBMC to run as a proper fullscreen app (otherwise we get an invalid drawable)
+			//CGLContextObj ctx = [[theRender context] CGLContext];
+			//CGLClearDrawable(ctx);
 		}
 		else if (ATV_version > 2.29 && ATV_version < 3.0)
 		{
@@ -275,7 +286,13 @@
 		
 		if (ATV_version > 2.99) {
 			if (DEBUG_MODE) NSLog(@"showFrontRow - captureAllDisplays");
-			[[BRDisplayManager sharedInstance] captureAllDisplays];
+
+			EPRenderer *theRender = [EPRenderer singleton];
+			//restore the renderer
+			[theRender setRenderer: storedRenderer];
+			[displayManager captureAllDisplays];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"BRDisplayManagerConfigurationEnd" object: displayManager];
+			
 		}
 		else if (ATV_version > 2.29 && ATV_version < 3.0)
 		{
