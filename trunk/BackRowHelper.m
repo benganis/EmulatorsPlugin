@@ -203,7 +203,8 @@
 		float ATV_version = [[[BRSettingsFacade sharedInstance] versionSoftware] floatValue];
 		if (DEBUG_MODE) NSLog(@"ATV_version = %f",ATV_version);
 		
-		if (ATV_version > 2.99) {
+		//if (ATV_version > 2.99) {
+		if (ATV_version > 2.29) {
 			if (DEBUG_MODE) NSLog(@"hideFrontRow - releaseAllDisplays");
 			[displayManager releaseAllDisplays];
 			
@@ -216,13 +217,13 @@
 			//CGLContextObj ctx = [[theRender context] CGLContext];
 			//CGLClearDrawable(ctx);
 		}
-		else if (ATV_version > 2.29 && ATV_version < 3.0)
-		{
-			if (DEBUG_MODE) NSLog(@"hideFrontRow - _setNewDisplay:kCGNullDirectDisplay");
+		//else if (ATV_version > 2.29 && ATV_version < 3.0)
+		//{
+		//	if (DEBUG_MODE) NSLog(@"hideFrontRow - _setNewDisplay:kCGNullDirectDisplay");
 			//[[BRDisplayManagerCore sharedInstance] _setNewDisplay:kCGNullDirectDisplay];
-			if (DEBUG_MODE) NSLog(@"hideFrontRow - releaseAllDisplays");
+		//	if (DEBUG_MODE) NSLog(@"hideFrontRow - releaseAllDisplays");
 			//[[BRDisplayManagerCore sharedInstance] releaseAllDisplays];
-		}
+		//}
 		else
 		{
 			if (DEBUG_MODE) NSLog(@"hideFrontRow : BRDisplayManagerDisplayOffline");
@@ -284,7 +285,8 @@
 		float ATV_version = [[[BRSettingsFacade sharedInstance] versionSoftware] floatValue];
 		if (DEBUG_MODE) NSLog(@"ATV_version = %f",ATV_version);
 		
-		if (ATV_version > 2.99) {
+		//if (ATV_version > 2.99) {
+		if (ATV_version > 2.29) {
 			if (DEBUG_MODE) NSLog(@"showFrontRow - captureAllDisplays");
 
 			EPRenderer *theRender = [EPRenderer singleton];
@@ -294,13 +296,13 @@
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"BRDisplayManagerConfigurationEnd" object: displayManager];
 			
 		}
-		else if (ATV_version > 2.29 && ATV_version < 3.0)
-		{
-			if (DEBUG_MODE) NSLog(@"showFrontRow - _setNewDisplay:kCGDirectMainDisplay");
+		//else if (ATV_version > 2.29 && ATV_version < 3.0)
+		//{
+		//	if (DEBUG_MODE) NSLog(@"showFrontRow - _setNewDisplay:kCGDirectMainDisplay");
 			//[[BRDisplayManagerCore sharedInstance] _setNewDisplay:kCGDirectMainDisplay];
-			if (DEBUG_MODE) NSLog(@"showFrontRow - captureAllDisplays");
+		//	if (DEBUG_MODE) NSLog(@"showFrontRow - captureAllDisplays");
 			//[[BRDisplayManagerCore sharedInstance] captureAllDisplays];
-		}
+		//}
 		else
 		{
 			if (DEBUG_MODE) NSLog(@"showFrontRow : BRDisplayManagerResumeRenderingNotification");
