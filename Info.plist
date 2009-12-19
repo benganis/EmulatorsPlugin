@@ -23,6 +23,6 @@
 	<key>NSPrincipalClass</key>
 	<string>EmulatorsAppliance</string>
 	<key>FRAppliancePreferedOrderValue</key>
-	<real>1.2</real>
+	<real>6.6</real>
 </dict>
 </plist>
