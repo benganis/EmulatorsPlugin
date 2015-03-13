@@ -1,10 +1,13 @@
 Thanks for downloading EmulatorsPlugIn.
 
-It was made by bgan1982@mac.com (Ben)
+It was made by 
+Ben Ganis
+bgan1982@gmail.com
 
 For the latest version, please visit:
 
-http://code.google.com/p/emulatorsplugin/
+https://github.com/benganis/EmulatorsPlugin
+http://code.google.com/p/emulatorsplugin/  (old page)
 http://wiki.awkwardtv.org/wiki/EmulatorsPlugIn
 
 ------------------------------------------------------------------------
